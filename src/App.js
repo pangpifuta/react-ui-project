@@ -9,9 +9,10 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import Home from './components/Home';
+import Login from './components/Login';
 import About from './components/About';
 import Messages from './components/Messages';
+import TCmain from './components/TrafficController';
 
 class App extends Component {
   render() {
@@ -23,15 +24,15 @@ class App extends Component {
         </header>
         <div className="menu">
             <ul>
-              <li> <Link to="/">Home</Link> </li>
-              <li> <Link to="/messages">Messages</Link> </li>
+              <li> <Link to="/">Login</Link> </li>
+              <li> <Link to="/traffic">Traffic Control</Link> </li>
               <li> <Link to="/about">About</Link> </li>
             </ul>
         </div>
         <div className="App-intro">
           <Switch>
-            <Route exact path="/"  component={Home} />
-            <Route path="/messages" component={Messages} />
+            <Route exact path="/"  component={Login} />
+            <Route path="/traffic" component={TCmain} />
             <Route path="/about" component={About} />
             <Redirect to="/" />
           </Switch>
