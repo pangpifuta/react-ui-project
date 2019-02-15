@@ -8,44 +8,37 @@ let logout = {
   color:'blue',
   fontSize:30
 }*/
-class TCmain extends Component {
+class Region extends Component {
   constructor(props) {
     super(props)
     this.logOutRoute = this.logOutRoute.bind(this);
-    this.selectRoute = this.selectRoute.bind(this);
-
   }
   
   logOutRoute(){
-    let path = `./`
-    this.props.history.push(path);
-  }
-
-  selectRoute(){
-    let path = `./region`
+    let path = `./login`
     this.props.history.push(path);
   }
 
   render() {
     return (
-
-      <div className="TCmain">
-         <div className="header">
+      <div className="body">
+      <div className="Region">
+         
             <a>Select Region</a>
-        </div>
+        
         <div className="body">
+
         <form><input placeholder="Coordinate X" /></form>
           <form><input placeholder="Coordinate Y" /></form>
-          {/* <form><button type="submit" onClick={this.SelectRoute}> Select </button></form> */}
-          <div><button className="region" onClick={this.selectRoute}> Select </button></div>
-          <div><button className="logout" onClick={this.logOutRoute}> Logout </button></div>
-
+          
+          <button className="analyze" onClick={this.logOutRoute}> analyze </button>
+          <button className="logout" onClick={this.logOutRoute}> Logout </button>
         </div>
       </div>
-
+      </div>
     )
   }
 }
 
 
-export default TCmain
+export default Region

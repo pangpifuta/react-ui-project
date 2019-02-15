@@ -1,0 +1,128 @@
+.sidebar {
+    position: fixed;
+    width: 15%;
+    background: hsl(213, 55%, 75%);
+    height: 100%;
+    margin-top: 4.201%;
+}
+
+/* .sidebar__navigation {
+    display: flex;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.sidebar_navigation-items{
+    text-decoration: none;
+    color: white; 
+}
+
+.sidebar_navigation-items a:hover,
+.sidebar_navigation-items a:active{
+    color: orange;
+    background-color: red;
+}
+    */
+.tab {
+    float: left;
+    border: 0px solid transparent;
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab a {
+    text-decoration: none;
+    display: block;
+    background-color: inherit;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab a:hover {
+    background-color: rgb(102, 134, 202);
+  }
+  
+  /* Create an active/current "tab button" class */
+  .tab a.active {
+    background-color: #ccc;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 70%;
+    border-left: none;
+    height: 300px;
+    display: none;
+
+  }
+  
+
+  * {box-sizing: border-box}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.profile_container {
+  position:center; 
+  width: 90%;
+  /* height: 190%; */
+  max-width: 87.5%;
+  /* max-height: 20%; */
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+/* Make the image to responsive */
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10% ;
+  border-radius: 50%;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
+.profile_container:hover{
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.4); /* Black see-through */
+    border-radius: 25%;
+
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: auto; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 77.5%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 1.2rem;
+  margin-left: 12.5%;
+
+  text-align: center;
+  border-radius: 25%;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.profile_container:hover .overlay {
+  opacity: 1;
+}
+
