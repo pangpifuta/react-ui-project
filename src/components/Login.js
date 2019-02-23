@@ -7,10 +7,17 @@ class LogIn extends Component {
   constructor(props) {
     super(props)
     this.routeChange = this.routeChange.bind(this);
+    this.routeSignUp = this.routeSignUp.bind(this);
   }
   
   routeChange(){
     let path = `./traffic`
+    //let path = `./menu`
+    this.props.history.push(path);
+  }
+
+  routeSignUp(){
+    let path = `./signup`
     //let path = `./menu`
     this.props.history.push(path);
   }
@@ -28,6 +35,7 @@ class LogIn extends Component {
           <form><input placeholder="username" /></form>
           <form><input placeholder="password" /></form>
           <form>< button onClick={this.routeChange}> Log In </ button></form>
+          <form>< button onClick={this.routeSignUp}> Sign Up </ button></form>
 
         </div>
       //  </div>
