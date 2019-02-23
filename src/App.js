@@ -16,6 +16,7 @@ import {
 } from 'react-router-dom';
 
 import Login from './components/Login';
+import Signup from './components/Signup';
 import About from './components/About';
 import Messages from './components/Messages';
 import TCmain from './components/TrafficController';
@@ -53,6 +54,7 @@ class App extends Component {
           <Switch>
             <main>
             <Route exact path="/login"  component={Login} />
+            <Route path="/signup" component={Signup} />
             <Route path="/traffic" component={TCmain} />
             <Route path="/about" component={About} />
             <Route path="/menu" component={Menu} />
