@@ -33,7 +33,7 @@ const sidebar = props => (
     {/* <button class="tablinks" >Current Traffic</button>
     <button class="tablinks"   >Analyse Region</button> 
     <button class="tablinks" >Statistics</button>  */}
-    <a href="#" class="tablinks" >Current Traffic</a>
+    <a href="/currenttraffic" class="tablinks" >Current Traffic</a>
     <a href="/traffic" class="tablinks" >Analyse Region</a> 
     <a href="#" class="tablinks" >Statistics</a> 
     </div>

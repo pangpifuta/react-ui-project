@@ -9,18 +9,19 @@ class LogIn extends Component {
     this.routeChange = this.routeChange.bind(this);
     this.routeSignUp = this.routeSignUp.bind(this);
   }
-  
+
   routeChange(){
-    let path = `./traffic`
-    //let path = `./menu`
+    let path = `./traffic`;
     this.props.history.push(path);
   }
 
   routeSignUp(){
-    let path = `./signup`
-    //let path = `./menu`
+    let path = `./signup`;
     this.props.history.push(path);
   }
+
+  
+
   render() {
     return (
       // <div className="LogIn">
