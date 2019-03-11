@@ -3,6 +3,7 @@ import { Box, FormField, TextInput, Button, Heading, Text } from 'grommet';
 import { Login as Signin } from 'grommet-icons';
 import './Body.css'
 
+
 export default class Login extends Component {
     constructor(props) {
       super(props);
@@ -44,7 +45,7 @@ export default class Login extends Component {
       return (
         <div className="body">
         <Box flex direction="column" align="center" justify="center"  fill='vertical'>
-          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="light-0" animation='fadeIn'>
+          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="white" animation='fadeIn'>
             <Heading size="small" responsive={false} >
               Login
             </Heading>

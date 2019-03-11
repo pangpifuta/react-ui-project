@@ -2,16 +2,27 @@ import React, { Component } from 'react'
 import { Box, FormField, TextInput, Button, Heading, Text } from 'grommet';
 import { Login as Signin } from 'grommet-icons';
 import './Body.css'
+import { FormErrors } from './FormErrors';
 
 export default class Login extends Component {
     constructor(props) {
       super(props);
-      this.state = {
-        username: '',
-        password: '',
-      };
+    //   this.state = {
+    //     username: '',
+    //     password: '',
+    //   };
       this.onLogin = this.onLogin.bind(this);
       this.onSignup = this.onSignup.bind(this);
+
+      this.state = {
+        email: '',
+        password: '',
+        formErrors: {email: '', password: ''},
+        emailValid: false,
+        passwordValid: false,
+        formValid: false
+
+        }
     }
   
     onChangeusername = (e) => {
@@ -34,21 +45,61 @@ export default class Login extends Component {
         this.props.history.push(path);
     }
   
-    renderSigninButton() {
+    renderSignupButton() {
       return (
-        < Button primary icon={< Signin />} label="Sign in" onClick={this.onLogin} />
+        < Button primary icon={< Signin />} label="Sign Up" onClick={this.onLogin} />  /*change icon here later*/
       );
     }
+
+    handleUserInput = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({[name]: value},
+                      () => { this.validateField(name, value) });
+      }
+    
+      validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+    
+        switch(fieldName) {
+          case 'email':
+            emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+            fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+            break;
+          case 'password':
+            passwordValid = value.length >= 6;
+            fieldValidationErrors.password = passwordValid ? '': ' is too short';
+            break;
+          default:
+            break;
+        }
+        this.setState({formErrors: fieldValidationErrors,
+                        emailValid: emailValid,
+                        passwordValid: passwordValid
+                      }, this.validateForm);
+      }
+    
+      validateForm() {
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+      }
+    
+      errorClass(error) {
+        return(error.length === 0 ? '' : 'has-error');
+      }
+      
   
     render() {
       return (
         <div className="body">
         <Box flex direction="column" align="center" justify="center"  fill='vertical'>
-          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="light-0" animation='fadeIn'>
+          {/* <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="light-0" animation='fadeIn'> */}
+          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="white" animation='fadeIn'>
             <Heading size="small" responsive={false} >
               Sign up
             </Heading>
-            <FormField label="Username" >
+            <FormField label="Username">
               <TextInput
                 ref='usernameInput'
                 autoFocus
@@ -58,7 +109,11 @@ export default class Login extends Component {
             </FormField>
 
                 <FormField label="E-mail">
-                <TextInput placeholder=" " />
+                {/* <TextInput placeholder=" " /> */}
+                <TextInput placeholder=" " type="email" required className="form-control" name="email"
+                            
+                            value={this.state.email}
+                            onChange={this.handleUserInput}/>
             </FormField>
 
             <FormField label="Password">
@@ -70,19 +125,22 @@ export default class Login extends Component {
             </FormField>
 
                 <FormField label="Confirm Password">
-                <TextInput placeholder=" " />
+                <TextInput placeholder=" " 
+                type="password" required className="form-control" name="password"
+                value={this.state.password}
+                onChange={this.handleUserInput}/>
+                
             </FormField>
   
-            {this.renderSigninButton()}
+            {this.renderSignupButton()}
   
-            <Box justify='center' direction='row' align='center' pad='small'>
-              <Button hoverIndicator onClick={this.onForgot}>
-                <Text size='small'>Forgot password? /</Text>
-              </Button>
-              <Button hoverIndicator style={{ marginLeft: 5 }} onClick={this.onSignup}>
-                <Text weight='bold' size='small'>Sign up</Text>
-              </Button>
-            </Box>
+            <Box>
+            {/* <input type="email" required className="form-control" name="email"
+                            placeholder="Email"
+                            value={this.state.email}
+                            onChange={this.handleUserInput}></input> */}
+            <FormErrors formErrors={this.state.formErrors} />
+                </Box>
           </Box>
         </Box>
         </div>
