@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "grommet": "^2.5.5",
+    "grommet-controls": "^1.1.15",
     "grommet-icons": "^4.2.0",
     "react": "^16.7.0",
     "react-bootstrap": "^0.32.4",

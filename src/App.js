@@ -7,7 +7,7 @@ import Toolbar from './components/Toolbar/Toolbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
-import { LineChart , BarChart, Optimize, Car} from 'grommet-icons';
+import { LineChart , BarChart, Optimize, Car, Clock} from 'grommet-icons';
 import { Add } from "grommet-icons";
 
 
@@ -35,6 +35,8 @@ import CurrentTraffic from './components/CurrentTraffic'
 import TestGrommet from './components/TestGrommet'
 import TestSignup from './components/TestSignup'
 import Stat from './components/Stat'
+import Initialization from './components/Initialization'
+import RealTimeOptimization from './components/RealTimeOptimization'
 
 const PlainButton = props => (
   <Grommet theme={grommet}>
@@ -160,8 +162,16 @@ state = { sidebar: true };
                 </SidebarButton>
               )
               )}
-              {["Optimize Traffic"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<Optimize/>} label="Optimize Traffic" href="/tgrommet" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+              {["Initialization"].map(name => (
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<BarChart/>} label="Initialization" href="/initialization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+                   <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
+                    <Text>{name}</Text>
+                   </Box> 
+                </SidebarButton>
+              )
+              )}
+              {["Real Time Optimization"].map(name => (
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<Clock/>} label="Real Time Optimization" href="/real-time-optimization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
                    <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
                     <Text>{name}</Text>
                    </Box> 
@@ -192,6 +202,8 @@ state = { sidebar: true };
              <Route path="/tgrommet" component={TestGrommet} />
              <Route path="/tsignup" component={TestSignup} />
              <Route path="/stat" component={Stat} />
+             <Route path="/initialization" component={Initialization} />
+             <Route path="/real-time-optimization" component={RealTimeOptimization} />
              </main>
              <Redirect to="/" />
            </Switch>
