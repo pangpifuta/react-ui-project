@@ -14,6 +14,14 @@ class RealTimeOptimization extends Component {
         this.routeChange = this.routeChange.bind(this);
         this.routeSignUp = this.routeSignUp.bind(this);
 
+        this.state = {
+          region: '',
+          timeStep: '',
+          timeDur: '',
+          generation: '',
+          noOfInd: ''
+        };
+
       }
     
       routeChange(){
@@ -70,7 +78,9 @@ class RealTimeOptimization extends Component {
               <Text>Generation</Text>
               <SimpleNumberInput min={1} defaultValue={1}/>
               </FormField></Box>
+
               {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
+
               <Box align="left" pad="medium">
               <Button label="start optimization"/>
               </Box>
