@@ -27,9 +27,7 @@ import {
 import Login from './components/Login';
 import Signup from './components/Signup';
 import About from './components/About';
-import Messages from './components/Messages';
 import TCmain from './components/TrafficController';
-import Region from './components/Region';
 import CurrentTraffic from './components/CurrentTraffic'
 import Stat from './components/Stat'
 import Initialization from './components/Initialization'

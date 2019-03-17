@@ -36,12 +36,13 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
-import htmlContent from './traffic.html';
+// import htmlContent from './traffic.html';
 
 const CurrentTraffic = React.createClass({
     render() {
         return (
-            <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
+            <div></div>
+            // <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
         );
     }
 });
