@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "google": "^2.1.0",
+    "google-map-react": "^1.1.2",
+    "google-maps-react": "^2.0.2",
     "grommet": "^2.5.5",
     "grommet-controls": "^1.1.15",
     "grommet-icons": "^4.2.0",

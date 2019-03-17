@@ -29,11 +29,8 @@ import Signup from './components/Signup';
 import About from './components/About';
 import Messages from './components/Messages';
 import TCmain from './components/TrafficController';
-// import Menu from './components/Menu';
 import Region from './components/Region';
 import CurrentTraffic from './components/CurrentTraffic'
-import TestGrommet from './components/TestGrommet'
-import TestSignup from './components/TestSignup'
 import Stat from './components/Stat'
 import Initialization from './components/Initialization'
 import RealTimeOptimization from './components/RealTimeOptimization'
@@ -142,7 +139,7 @@ state = { sidebar: true };
             <Button onClick={() => this.setState({ sidebar: !sidebar })}>
               <Heading size="small">Optimal Traffic Control</Heading>
             </Button>
-            <Text><a href="/tgrommet">Log In</a></Text>  {/* delete the text decoration */}
+            <Text><a href="/login">Log In</a></Text>  {/* delete the text decoration */}
           </Box>
           {sidebar && (
             <Box
@@ -155,7 +152,7 @@ state = { sidebar: true };
               ]}
             >
               {["Current Traffic"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<Car/>} label="Current Traffic" href="/tsignup" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<Car/>} label="Current Traffic" href="/currenttraffic" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
                    <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
                     <Text>{name}</Text>
                    </Box> 
@@ -199,8 +196,6 @@ state = { sidebar: true };
              <Route path="/about" component={About} />
              <Route path="/region" component={Region} />
              <Route path="/currenttraffic" component={CurrentTraffic} />
-             <Route path="/tgrommet" component={TestGrommet} />
-             <Route path="/tsignup" component={TestSignup} />
              <Route path="/stat" component={Stat} />
              <Route path="/initialization" component={Initialization} />
              <Route path="/real-time-optimization" component={RealTimeOptimization} />

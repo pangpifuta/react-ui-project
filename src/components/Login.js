@@ -1,49 +1,83 @@
 import React, { Component } from 'react'
-import Link from 'react-router-dom'
+import { Box, FormField, TextInput, Button, Heading, Text } from 'grommet';
+import { Login as Signin } from 'grommet-icons';
 import './Body.css'
 
-class LogIn extends Component {
 
-  constructor(props) {
-    super(props)
-    this.routeChange = this.routeChange.bind(this);
-    this.routeSignUp = this.routeSignUp.bind(this);
-  }
-
-  routeChange(){
-    let path = `./traffic`;
-    this.props.history.push(path);
-  }
-
-  routeSignUp(){
-    let path = `./signup`;
-    this.props.history.push(path);
-  }
-
+export default class Login extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        username: '',
+        password: '',
+      };
+      this.onLogin = this.onLogin.bind(this);
+      this.onSignup = this.onSignup.bind(this);
+    }
   
-
-  render() {
-    return (
-      // <div className="LogIn">
-      //   <div className="header">
-      //       <a>Login</a>
-      //   </div>
-
+    onChangeusername = (e) => {
+      this.setState({ username: e.target.value });
+    }
+    onChangePassword = (e) => {
+      this.setState({ password: e.target.value });
+    }
+  
+    onLogin = () => {
+        let path = `./traffic`;
+        this.props.history.push(path);
+    }
+  
+    onForgot = () => {
+    }
+  
+    onSignup = () => {
+        let path = `./signup`;
+        this.props.history.push(path);
+    }
+  
+    renderSigninButton() {
+      return (
+        < Button primary icon={< Signin />} label="Sign in" onClick={this.onLogin} />
+      );
+    }
+  
+    render() {
+      return (
         <div className="body">
-        
-        <a>Login</a>
-        
-          <form><input placeholder="username" /></form>
-          <form><input placeholder="password" /></form>
-          <form>< button onClick={this.routeChange}> Log In </ button></form>
-          <form>< button onClick={this.routeSignUp}> Sign Up </ button></form>
-
+        <Box flex direction="column" align="center" justify="center"  fill='vertical'>
+          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="white" animation='fadeIn'>
+            <Heading size="small" responsive={false} >
+              Login
+            </Heading>
+            <FormField >
+              <TextInput
+                ref='usernameInput'
+                autoFocus
+                placeholder="Username"
+                value={this.state.username}
+                onChange={this.onChangeusername} />
+            </FormField>
+            <FormField>
+              <TextInput
+                placeholder="Password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChangePassword} />
+            </FormField>
+  
+            {this.renderSigninButton()}
+  
+            <Box justify='center' direction='row' align='center' pad='small'>
+              <Button hoverIndicator onClick={this.onForgot}>
+                <Text size='small'>Forgot password? /</Text>
+              </Button>
+              <Button hoverIndicator style={{ marginLeft: 5 }} onClick={this.onSignup}>
+                <Text weight='bold' size='small'>Sign up</Text>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
         </div>
-      //  </div>
-    )
+      )
+    }
   }
-
-
-}
-
-export default LogIn

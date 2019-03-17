@@ -1,30 +1,57 @@
 import React, { Component } from 'react'
-// import Link from 'react-router-dom'
-import { FormErrors } from './FormErrors';
+import { Box, FormField, TextInput, Button, Heading, Text } from 'grommet';
+import { Login as Signin } from 'grommet-icons';
 import './Body.css'
+import { FormErrors } from './FormErrors';
 
-class SignUp extends Component {
+export default class Signup extends Component {
     constructor(props) {
-        super(props)
-        this.routeChange = this.routeChange.bind(this);
+      super(props);
+    //   this.state = {
+    //     username: '',
+    //     password: '',
+    //   };
+      this.onLogin = this.onLogin.bind(this);
+      this.onSignup = this.onSignup.bind(this);
 
-        this.state = {
-          email: '',
-          password: '',
-          formErrors: {email: '', password: ''},
-          emailValid: false,
-          passwordValid: false,
-          formValid: false
- 
-          }
-      }
-      
-      routeChange(){
-        let path = `./login`;
+      this.state = {
+        email: '',
+        password: '',
+        formErrors: {email: '', password: ''},
+        emailValid: false,
+        passwordValid: false,
+        formValid: false
+
+        }
+    }
+  
+    onChangeusername = (e) => {
+      this.setState({ username: e.target.value });
+    }
+    onChangePassword = (e) => {
+      this.setState({ password: e.target.value });
+    }
+  
+    onLogin = () => {
+        let path = `./traffic`;
         this.props.history.push(path);
-      }
+    }
+  
+    onForgot = () => {
+    }
+  
+    onSignup = () => {
+        let path = `./signup`;
+        this.props.history.push(path);
+    }
+  
+    renderSignupButton() {
+      return (
+        < Button primary icon={< Signin />} label="Sign Up" onClick={this.onLogin} />  /*change icon here later*/
+      );
+    }
 
-      handleUserInput = (e) => {
+    handleUserInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         this.setState({[name]: value},
@@ -62,89 +89,61 @@ class SignUp extends Component {
         return(error.length === 0 ? '' : 'has-error');
       }
       
-      
-    render(){
-        return (
-            <div className="body">
-            <div class="form">
-                <div class="tab-content">
-                    <div id="signup">   
-                        <h1>Sign Up for Free</h1>
-                        
-                        <form action="/" method="post">
-                        
-                        
-                        <div class="top-row">
-                            <div class="field-wrap">
+  
+    render() {
+      return (
+        <div className="body">
+        <Box flex direction="column" align="center" justify="center"  fill='vertical'>
+          {/* <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="light-0" animation='fadeIn'> */}
+          <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="white" animation='fadeIn'>
+            <Heading size="small" responsive={false} >
+              Sign up
+            </Heading>
+            <FormField label="Username">
+              <TextInput
+                ref='usernameInput'
+                autoFocus
+                placeholder=" "
+                value={this.state.username}
+                onChange={this.onChangeusername} />
+            </FormField>
+
+                <FormField label="E-mail">
+                {/* <TextInput placeholder=" " /> */}
+                <TextInput placeholder=" " type="email" required className="form-control" name="email"
                             
-                            
-                            <label>
-                              User Name<span class="req">*</span>
-                            </label>
-                            <input type="text"required autocomplete="off"/>
-                            </div>
+                            value={this.state.email}
+                            onChange={this.handleUserInput}/>
+            </FormField>
 
-                            <div class="field-wrap">
-                            <label>
-                                First Name<span class="req">*</span>
-                            </label>
-                            <input type="text" required autocomplete="off" />
-                            </div>
-                        
-                            <div class="field-wrap">
-                            <label>
-                                Last Name<span class="req">*</span>
-                            </label>
-                            <input type="text"required autocomplete="off"/>
-                            </div>
-                        </div>
+            <FormField label="Password">
+              <TextInput
+                placeholder=" "
+                type="password"
+                value={this.state.password}
+                onChange={this.onChangePassword} />
+            </FormField>
 
-                        <div class="field-wrap">
-                            {/* <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}> */}
-                            <label>
-                            Email Address<span class="req">*</span>
-                            </label> 
-
-                            {/* <input type="email"required autocomplete="off"/> */}
-                            <input type="email" required className="form-control" name="email"
+                <FormField label="Confirm Password">
+                <TextInput placeholder=" " 
+                type="password" required className="form-control" name="password"
+                value={this.state.password}
+                onChange={this.handleUserInput}/>
+                
+            </FormField>
+  
+            {this.renderSignupButton()}
+  
+            <Box>
+            {/* <input type="email" required className="form-control" name="email"
                             placeholder="Email"
                             value={this.state.email}
-                            onChange={this.handleUserInput}  />
-                            <FormErrors formErrors={this.state.formErrors} />
-
-                            {/* </div> */}
-                            
-                        </div>
-                        
-                        <div class="field-wrap">
-                            <label>
-                            Password<span class="req">*</span>
-                            </label>
-                            {/* <input type="password"required autocomplete="off"/> */}
-                            <input type="password" className="form-control" name="password"
-                            placeholder="Password"
-                            value={this.state.password}
-                            onChange={this.handleUserInput}  />
-                        </div>
-
-                        <div class="field-wrap">
-                            <label>
-                            Confirm Password<span class="req">*</span>
-                            </label>
-                            <input type="password"required autocomplete="off"/>
-                        </div>
-
-                        {/* <button class="button button-block"/>Get Started</button> */}
-                        <form>< button onClick={this.routeChange}> Sign Up </ button></form>
-                        </form>
-
-                    </div>
-                        
-                </div>
-                
-            </div>
-            </div>
-        )
+                            onChange={this.handleUserInput}></input> */}
+            <FormErrors formErrors={this.state.formErrors} />
+                </Box>
+          </Box>
+        </Box>
+        </div>
+      )
     }
-}
-export default SignUp 
+  }
