@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import {PageHeader} from 'react-bootstrap';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
-import Toolbar from './components/Toolbar/Toolbar';
-import Sidebar from './components/Sidebar/Sidebar';
+// import Toolbar from './components/Toolbar/Toolbar';
+// import Sidebar from './components/Sidebar/Sidebar';
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
 import { LineChart , BarChart, Optimize, Car, Clock} from 'grommet-icons';
@@ -32,6 +32,7 @@ import CurrentTraffic from './components/CurrentTraffic'
 import Stat from './components/Stat'
 import Initialization from './components/Initialization'
 import RealTimeOptimization from './components/RealTimeOptimization'
+import Region from "./components/Region"
 
 const PlainButton = props => (
   <Grommet theme={grommet}>

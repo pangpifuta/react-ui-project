@@ -33,20 +33,20 @@
 
 // export default CurrentTraffic;
 
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+// import React, { Component } from 'react';
+// import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 // import htmlContent from './traffic.html';
 
-const CurrentTraffic = React.createClass({
-    render() {
-        return (
-            <div></div>
-            // <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
-        );
-    }
-});
-export default CurrentTraffic;
+// const CurrentTraffic = React.createClass({
+//     render() {
+//         return (
+//             <div></div>
+//             // <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
+//         );
+//     }
+// });
+// export default CurrentTraffic;
 
 
 // const mapStyles = {
