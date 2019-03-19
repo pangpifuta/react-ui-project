@@ -6,6 +6,7 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
+import {Clock as DClock} from 'grommet';
 import { LineChart , BarChart, Optimize, Car, Clock} from 'grommet-icons';
 import { Add } from "grommet-icons";
 
@@ -58,6 +59,13 @@ const SidebarButton = ({ label, icon, href }) => (
   </Button>
 );
 
+const DigitalClock = () => (
+
+    <Box align="center" justify="start" pad="small">
+      <DClock type="digital" size="large" timezone="Poland"/>
+    </Box>
+
+);
 
 class App extends Component {
 
@@ -90,9 +98,10 @@ state = { sidebar: true };
             background="neutral-3"
           >
             <Button onClick={() => this.setState({ sidebar: !sidebar })}>
-              <Heading size="small">Optimal Traffic Control</Heading>
+              <Heading size="small" >Optimal Traffic Control</Heading>
             </Button>
-            <Text><a href="/login">Log In</a></Text>  {/* delete the text decoration */}
+            {/* <Text><a href="/login">Log In</a></Text>  */}
+            <DigitalClock />
           </Box>
           {sidebar && (
             <Box

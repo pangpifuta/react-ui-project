@@ -75,10 +75,10 @@ class Initialization extends Component {
               <Text>Time Duration</Text>
               <Box direction='row'>
               <Box style={{ width: 160 }} >
-              <SimpleNumberInput min={1} defaultValue={1} suffix=' hr'/>
+              <SimpleNumberInput min={0} defaultValue={0} suffix=' hr'/>
               </Box>
               <Box style={{ width: 170 }} >
-              <SimpleNumberInput min={0} max={59} defaultValue={1} suffix=' min' value={this.state.minute} />
+              <SimpleNumberInput min={0} max={59} defaultValue={0} suffix=' min' value={this.state.minute} />
               </Box>
               </Box>
 
