@@ -153,11 +153,12 @@ state = { sidebar: true };
            <Switch>
              <main>
              <Route exact path="/login"  component={Login} />
-             <Route path="/"  component={CurrentTraffic} />
+             {/* <Redirect exact path="/" to="currentTraffic" /> */}
+             <Route exact path="/" render={() => <Redirect to="/currenttraffic" />} />
              <Route path="/signup" component={Signup} />
              <Route path="/traffic" component={TCmain} />
              <Route path="/about" component={About} />
-             <Route path="/currenttraffic" component={CurrentTraffic} />
+             <Route name="currentTraffic"path="/currenttraffic" component={CurrentTraffic} />
              <Route path="/stat" component={Stat} />
              <Route path="/initialization" component={Initialization} />
              <Route path="/real-time-optimization" component={RealTimeOptimization} />
