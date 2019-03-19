@@ -7,7 +7,8 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
 import {Clock as DClock} from 'grommet';
-import { LineChart , BarChart, Optimize, Car, Clock} from 'grommet-icons';
+import {Clock as cClock} from 'react-live-clock';
+import { LineChart , BarChart, Optimize, Car, Clock as ClockIcon} from 'grommet-icons';
 import { Add } from "grommet-icons";
 
 
@@ -101,7 +102,8 @@ state = { sidebar: true };
               <Heading size="small" >Optimal Traffic Control</Heading>
             </Button>
             {/* <Text><a href="/login">Log In</a></Text>  */}
-            <DigitalClock />
+            {/* <DigitalClock /> */}
+            <cClock format={'HH:mm:ss'} ticking={true} timezone={'Poland'}></cClock>
           </Box>
           {sidebar && (
             <Box
@@ -130,7 +132,7 @@ state = { sidebar: true };
               )
               )}
               {["Real Time Optimization"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<Clock/>} label="Real Time Optimization" href="/real-time-optimization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<ClockIcon/>} label="Real Time Optimization" href="/real-time-optimization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
                    <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
                     <Text>{name}</Text>
                    </Box> 
