@@ -58,10 +58,10 @@ class RealTimeOptimization extends Component {
                 <Text>Region</Text>
               <SimpleSelect options={["Warsaw"]} placeholder="select region"></SimpleSelect></FormField>
 
-              <FormField>
+              {/* <FormField>
               <Text>Time Step</Text>
               <SimpleNumberInput min={1} defaultValue={1}/>
-              </FormField>
+              </FormField> */}
 
               <Text>Time Duration</Text>
               <Box direction='row'>
@@ -79,10 +79,15 @@ class RealTimeOptimization extends Component {
               <SimpleNumberInput min={1} defaultValue={1}/>
               </FormField></Box>
 
+              <Box>
+              <FormField>
+              <Text>Number of Individuals</Text>
+              <SimpleNumberInput min={0} max={59} step={1000} defaultValue={0} suffix=' individuals'/></FormField></Box>
+
               {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
 
               <Box align="left" pad="medium">
-              <Button label="start optimization"/>
+              <Button label="start optimization" color="#0c96bc"/>
               </Box>
               
               </div>

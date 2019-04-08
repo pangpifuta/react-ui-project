@@ -33,8 +33,8 @@ import RealTimeOptimization from './components/RealTimeOptimization'
 
 const PlainButton = props => (
   <Grommet theme={grommet}>
-    <Box  align="center" pad="small" background="dark-3">
-      <Button hoverIndicator="light-1" onClick={() => {}} {...props}>
+    <Box  align="center" pad="small" background="#516f77">
+      <Button hoverIndicator="#606668" onClick={() => {}} {...props}>
         <Box pad="small" direction="row" align="center" gap="small">
 
           <Add />
@@ -50,7 +50,7 @@ const SidebarButton = ({ label, icon, href }) => (
       <Box
         direction="row"
         gap="small"
-        background={hover ? "dark-1" : undefined}
+        background={hover ? "#606668" : undefined}
         pad={{ horizontal: "medium", vertical: "small" }}
       >
       {icon}
@@ -96,14 +96,14 @@ state = { sidebar: true };
             align="center"
             justify="between"
             pad={{ horizontal: "medium", vertical: "small" }}
-            background="neutral-3"
+            background="#0c96bc"
           >
             <Button onClick={() => this.setState({ sidebar: !sidebar })}>
               <Heading size="small" >Optimal Traffic Control</Heading>
             </Button>
             {/* <Text><a href="/login">Log In</a></Text>  */}
-            {/* <DigitalClock /> */}
-            <cClock format={'HH:mm:ss'} ticking={true} timezone={'Poland'}></cClock>
+            <DigitalClock />
+            {/* <cClock format={'HH:mm:ss'} ticking={true} timezone={'Poland'}></cClock> */}
           </Box>
           {sidebar && (
             <Box

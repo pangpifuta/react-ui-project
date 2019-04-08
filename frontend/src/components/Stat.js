@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
-
+import { Math} from "react";
 import { Grommet, Box, DataTable, Meter, Text, CheckBox } from "grommet";
 import { grommet } from "grommet/themes";
+import {Text as GrommetText} from "grommet" 
 
 const amountFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -15,7 +16,7 @@ const columns = [
     property: "name",
     header: <Text>Saving Name</Text>,
     primary: true,
-    footer: "Total"
+    // footer: "Total"
   },
   {
     property: "location",
@@ -31,24 +32,40 @@ const columns = [
   {
     property: "percent",
     header: "Traffic Flow Percent Reduction",
-    render: datum => (
+    render: datum => 
+    (datum.percent >= 0 && ( //if datum.percent >=0 then do this
       <Box pad={{ vertical: "xsmall" }}>
         <Meter
-          values={[{ value: datum.percent }]}
+          // values={[{ value: datum.percent, color:"neutral-4"}]}
+          values={[{ value: datum.percent, color:"#0c96bc"}]}
           thickness="small"
           size="small"
+          // a11yTitle={datum.percent}
         />
+        <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
       </Box>
+    )) || ( //else
+    <Box pad={{ vertical: "xsmall" }} >
+      <Meter
+        // values={[{ value: datum.percent, color:"neutral-4"}]}
+        values={[{ value: -datum.percent, color:"#606668"}]}  //*-1 make it positive 
+        thickness="small"
+        size="small"
+        label={datum.percent} 
+      />
+      <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
+    </Box>
     )
   },
-  {
-    property: "paid",
-    header: "Paid",
-    render: datum => amountFormatter.format(datum.paid / 100),
-    align: "end",
-    aggregate: "sum",
-    footer: { aggregate: true }
-  }
+
+  // {
+  //   property: "paid",
+  //   header: "Paid",
+  //   render: datum => amountFormatter.format(datum.paid / 100),
+  //   align: "end",
+  //   aggregate: "sum",
+  //   footer: { aggregate: true }
+  // }
 ];
 
 const locations = [
@@ -64,66 +81,68 @@ for (let i = 0; i < 40; i += 1) {
     name: `Name ${i + 1}`,
     location: locations[i % locations.length],
     date: `2018-07-${(i % 30) + 1}`,
-    percent: (i % 11) * 10,
-    paid: ((i + 1) * 17) % 1000
+    // percent: (i % 11) * 10,
+    percent: i,
+    rawpercent: ((i % 11) * 10).toString()
+    // paid: ((i + 1) * 17) % 1000
   });
 }
 const DATA = [
   {
     name: "Alan",
-    location: "",
+    location: "Warsaw",
     date: "",
-    percent: 0,
-    paid: 0
+    percent: -20,
+    // paid: 0
   },
   {
     name: "Bryan",
     location: "Fort Collins",
     date: "2018-06-10",
     percent: 30,
-    paid: 1234
+    // paid: 1234
   },
   {
     name: "Chris",
     location: "Palo Alto",
     date: "2018-06-09",
     percent: 40,
-    paid: 2345
+    // paid: 2345
   },
   {
     name: "Eric",
     location: "Palo Alto",
     date: "2018-06-11",
     percent: 80,
-    paid: 3456
+    // paid: 3456
   },
   {
     name: "Doug",
     location: "Fort Collins",
     date: "2018-06-10",
     percent: 60,
-    paid: 1234
+    // paid: 1234
   },
   {
     name: "Jet",
     location: "Palo Alto",
     date: "2018-06-09",
     percent: 40,
-    paid: 3456
+    // paid: 3456
   },
   {
     name: "Michael",
     location: "Boise",
     date: "2018-06-11",
     percent: 50,
-    paid: 1234
+    // paid: 1234
   },
   {
     name: "Tracy",
     location: "San Francisco",
     date: "2018-06-10",
     percent: 10,
-    paid: 2345
+    // paid: 2345
   }
 ];
 
@@ -214,13 +233,15 @@ class Stat extends Component {
 const controlledColumns = columns.map(col => Object.assign({}, col));
 delete controlledColumns[0].footer;
 delete controlledColumns[3].footer;
-delete controlledColumns[4].footer;
-delete controlledColumns[4].aggregate;
+// delete controlledColumns[4].footer;
+// delete controlledColumns[4].aggregate;
 
 class ControlledDataTable extends Component {
   state = {
     checked: []
   };
+
+
 
   onCheck = (event, value) => {
     const { checked } = this.state;

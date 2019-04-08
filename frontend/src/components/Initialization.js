@@ -112,7 +112,7 @@ class Initialization extends Component {
 
               {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
               <Box align="left" pad="medium">
-              <Button label="start optimization"/>
+              <Button label="start optimization" color="#0c96bc"/>
               </Box>
 
               

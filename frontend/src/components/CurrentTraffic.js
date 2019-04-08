@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import './CurrentTraffic.css'
+import LoadingScreen from 'react-loading-screen';
+
 
 export class CurrentTraffic extends Component {
-
+    constructor(props){
+        super(props)
+        this.state = {
+            loading: true
+        }
+    }
     componentDidMount(){
         this.renderMap()
+        setTimeout(() =>
+      this.setState({ loading: false })
+    , 1500)
     }
 
     renderMap = () => {
         loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCpfEuV9haslB7YcbL6LwwXAK8ELYHiUck&callback=initMap")
         window.initMap = this.initMap
+        // this.setState({loading: false})
       }
 
 
@@ -24,10 +35,22 @@ initMap = ()=>{
     }
 
     render(){
+        const { loading } = this.state
+
         return(
-            <main>
+        <main>
+
+        <LoadingScreen
+            loading={loading}
+            bgColor='#f1f1f1'
+            spinnerColor='#9ee5f8'
+            textColor='#676767'
+            logoSrc='https://upload.wikimedia.org/wikipedia/commons/a/a3/Nuvola_apps_ksysv.png'
+        > 
                 <div id="map"></div>
-                </main>
+        </LoadingScreen>
+        </main>
+
         )
     }
 
