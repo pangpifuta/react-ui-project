@@ -16,6 +16,7 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.8.4",
     "react-google-maps-api": "^1.0.8",
+    "react-loading-screen": "0.0.17",
     "react-navbar": "^3.0.0",
     "react-router-dom": "4.2.2",
     "react-scripts": "1.0.17",
