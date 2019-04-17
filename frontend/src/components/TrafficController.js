@@ -15,13 +15,13 @@ class TCmain extends Component {
     this.selectRoute = this.selectRoute.bind(this);
 
   }
-  
-  logOutRoute(){
+
+  logOutRoute() {
     let path = `./`
     this.props.history.push(path);
   }
 
-  selectRoute(){
+  selectRoute() {
     let path = `./region`
     this.props.history.push(path);
   }
@@ -30,11 +30,11 @@ class TCmain extends Component {
     return (
 
       <div className="TCmain">
-         <div className="header">
-            <a>Select Region</a>
+        <div className="header">
+          <a>Select Region</a>
         </div>
         <div className="body">
-        <form><input placeholder="Coordinate X" /></form>
+          <form><input placeholder="Coordinate X" /></form>
           <form><input placeholder="Coordinate Y" /></form>
           {/* <form><button type="submit" onClick={this.SelectRoute}> Select </button></form> */}
           <div><button className="region" onClick={this.selectRoute}> Select </button></div>

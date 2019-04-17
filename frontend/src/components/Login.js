@@ -5,46 +5,46 @@ import './Body.css'
 
 
 export default class Login extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        username: '',
-        password: '',
-      };
-      this.onLogin = this.onLogin.bind(this);
-      this.onSignup = this.onSignup.bind(this);
-    }
-  
-    onChangeusername = (e) => {
-      this.setState({ username: e.target.value });
-    }
-    onChangePassword = (e) => {
-      this.setState({ password: e.target.value });
-    }
-  
-    onLogin = () => {
-        let path = `./traffic`;
-        this.props.history.push(path);
-    }
-  
-    onForgot = () => {
-    }
-  
-    onSignup = () => {
-        let path = `./signup`;
-        this.props.history.push(path);
-    }
-  
-    renderSigninButton() {
-      return (
-        < Button primary icon={< Signin />} label="Sign in" onClick={this.onLogin} />
-      );
-    }
-  
-    render() {
-      return (
-        <div className="body">
-        <Box flex direction="column" align="center" justify="center"  fill='vertical'>
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+    this.onLogin = this.onLogin.bind(this);
+    this.onSignup = this.onSignup.bind(this);
+  }
+
+  onChangeusername = (e) => {
+    this.setState({ username: e.target.value });
+  }
+  onChangePassword = (e) => {
+    this.setState({ password: e.target.value });
+  }
+
+  onLogin = () => {
+    let path = `./traffic`;
+    this.props.history.push(path);
+  }
+
+  onForgot = () => {
+  }
+
+  onSignup = () => {
+    let path = `./signup`;
+    this.props.history.push(path);
+  }
+
+  renderSigninButton() {
+    return (
+      < Button primary icon={< Signin />} label="Sign in" onClick={this.onLogin} />
+    );
+  }
+
+  render() {
+    return (
+      <div className="body">
+        <Box flex direction="column" align="center" justify="center" fill='vertical'>
           <Box responsive={false} pad='medium' style={{ width: 350 }} elevation='medium' background="white" animation='fadeIn'>
             <Heading size="small" responsive={false} >
               Login
@@ -64,9 +64,9 @@ export default class Login extends Component {
                 value={this.state.password}
                 onChange={this.onChangePassword} />
             </FormField>
-  
+
             {this.renderSigninButton()}
-  
+
             <Box justify='center' direction='row' align='center' pad='small'>
               <Button hoverIndicator onClick={this.onForgot}>
                 <Text size='small'>Forgot password? /</Text>
@@ -77,7 +77,7 @@ export default class Login extends Component {
             </Box>
           </Box>
         </Box>
-        </div>
-      )
-    }
+      </div>
+    )
   }
+}
