@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import { Math} from "react";
+import { Math } from "react";
 import { Grommet, Box, DataTable, Meter, Text, CheckBox } from "grommet";
 import { grommet } from "grommet/themes";
-import {Text as GrommetText} from "grommet" 
+import { Text as GrommetText } from "grommet"
+import Parser from './Parser'
 
 const amountFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -32,30 +33,30 @@ const columns = [
   {
     property: "percent",
     header: "Traffic Flow Percent Reduction",
-    render: datum => 
-    (datum.percent >= 0 && ( //if datum.percent >=0 then do this
-      <Box pad={{ vertical: "xsmall" }}>
-        <Meter
-          // values={[{ value: datum.percent, color:"neutral-4"}]}
-          values={[{ value: datum.percent, color:"#0c96bc"}]}
-          thickness="small"
-          size="small"
+    render: datum =>
+      (datum.percent >= 0 && ( //if datum.percent >=0 then do this
+        <Box pad={{ vertical: "xsmall" }}>
+          <Meter
+            // values={[{ value: datum.percent, color:"neutral-4"}]}
+            values={[{ value: datum.percent, color: "#0c96bc" }]}
+            thickness="small"
+            size="small"
           // a11yTitle={datum.percent}
-        />
-        <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
-      </Box>
-    )) || ( //else
-    <Box pad={{ vertical: "xsmall" }} >
-      <Meter
-        // values={[{ value: datum.percent, color:"neutral-4"}]}
-        values={[{ value: -datum.percent, color:"#606668"}]}  //*-1 make it positive 
-        thickness="small"
-        size="small"
-        label={datum.percent} 
-      />
-      <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
-    </Box>
-    )
+          />
+          <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
+        </Box>
+      )) || ( //else
+        <Box pad={{ vertical: "xsmall" }} >
+          <Meter
+            // values={[{ value: datum.percent, color:"neutral-4"}]}
+            values={[{ value: -datum.percent, color: "#606668" }]}  //*-1 make it positive 
+            thickness="small"
+            size="small"
+            label={datum.percent}
+          />
+          <GrommetText size="xsmall"> {datum.percent}% </GrommetText>
+        </Box>
+      )
   },
 
   // {
@@ -225,7 +226,7 @@ class Stat extends Component {
             onSearch={this.onSearch}
           />
         </Box>
-      </Grommet>
+      </Grommet >
     );
   }
 }

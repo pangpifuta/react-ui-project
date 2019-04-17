@@ -26,6 +26,9 @@ router = routers.DefaultRouter()  # add this
 router.register(r'regs', views.RegView, 'regid')  # add this
 
 urlpatterns = [
-    path('admin/', admin.site.urls), path('api/', include(router.urls)),  # add this
+    path('admin/', admin.site.urls), path('api/',
+                                          include(router.urls)),  # add this
     url(r'^api/auth/', include('knox.urls')),
+    url(r'^optimize/$', views.optimize),
+    url(r'^initialization/$', views.initialize)
 ]
