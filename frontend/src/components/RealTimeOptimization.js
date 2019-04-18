@@ -6,6 +6,7 @@ import SimpleNumberInput from "./objects/SimpleNumberInput";
 import { RangeInput,Select,TextInput, Text,Grommet, Box, FormField, Button } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { grommet } from "grommet/themes";
+import LoadingScreen from 'react-loading-screen';
 // import { NumberInput } from 'grommet/components/NumberInput';
 
 class RealTimeOptimization extends Component {
@@ -17,9 +18,9 @@ class RealTimeOptimization extends Component {
         this.state = {
           region: '',
           timeStep: '',
-          timeDur: '',
           generation: '',
-          noOfInd: ''
+          noOfInd: '',
+          loading: false
         };
 
       }
@@ -34,9 +35,18 @@ class RealTimeOptimization extends Component {
         this.props.history.push(path);
       }
     
-      
+      fetchData(){
+        var path = 'initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + 
+        '&generation=' + this.state.generation + '&numOfInd=' + this.state.numOfInd
+        fetch(path)
+        .then((Response) => Response.json())
+        .then((res) => {
+
+        })
+    }
     
       render() {
+        const loading = this.state.loading
         return (
           // <div className="LogIn">
           //   <div className="header">
@@ -86,10 +96,18 @@ class RealTimeOptimization extends Component {
 
               {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
 
+              <LoadingScreen
+                loading={loading}
+                bgColor='#f1f1f1'
+                spinnerColor='#9ee5f8'
+                textColor='#676767'
+                logoSrc='https://upload.wikimedia.org/wikipedia/commons/a/a3/Nuvola_apps_ksysv.png'
+              > 
               <Box align="left" pad="medium">
               <Button label="start optimization" color="#0c96bc"/>
               </Box>
-              
+              </LoadingScreen>
+
               </div>
               </Box>
               
@@ -104,4 +122,5 @@ class RealTimeOptimization extends Component {
     
     export default RealTimeOptimization
 
-        
+      
+   

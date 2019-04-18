@@ -194,6 +194,16 @@ const GroupedDataTable = () => (
 class Stat extends Component {
   state = { data: DATA };
 
+  fetchData(){
+    var path = 'stat'
+    fetch(path)
+    .then((Response) => Response.json())
+    .then((res) => {
+
+    })
+}
+
+
   onSearch = search => {
     let nextData;
     if (search) {

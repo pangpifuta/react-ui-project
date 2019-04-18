@@ -17,6 +17,7 @@ class Initialization extends Component {
         this.state = {
           region: '',
           timeStep: '',
+          hour: '',
           minute: '',
           generation: '',
           numOfInd: ''
@@ -42,6 +43,17 @@ class Initialization extends Component {
    
       onChangeMinute = (e) => {
         this.setState({ minute: e.target.value });
+      }
+
+      
+      fetchData(){
+          var path = 'initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration='+ this.state.hour*60+this.state.minute
+          '&generation=' + this.state.generation + '&numOfInd=' + this.state.numOfInd
+          fetch(path)
+          .then((Response) => Response.json())
+          .then((res) => {
+                
+          })
       }
     
     
@@ -122,7 +134,7 @@ class Initialization extends Component {
               
     </Grommet>
             // </div>
-          //  </div>
+          //  </div> fetch fetch fetch
         )
       }
     
