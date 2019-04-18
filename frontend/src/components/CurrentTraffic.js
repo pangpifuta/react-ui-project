@@ -14,8 +14,8 @@ export class CurrentTraffic extends Component {
     componentDidMount(){
         this.renderMap()
         setTimeout(() =>
-      this.setState({ loading: false })
-    , 1500)
+        this.setState({loading: false}), 1000)
+       
     }
 
     renderMap = () => {

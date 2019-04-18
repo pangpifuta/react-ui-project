@@ -7,8 +7,9 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
 import {Clock as DClock} from 'grommet';
-import {Clock as cClock} from 'react-live-clock';
+// import {Clock as cClock} from 'react-live-clock';
 import { LineChart , BarChart, Optimize, Car, Clock as ClockIcon} from 'grommet-icons';
+
 import { Add } from "grommet-icons";
 
 
@@ -60,17 +61,23 @@ const SidebarButton = ({ label, icon, href }) => (
   </Button>
 );
 
-const DigitalClock = () => (
-
+const DigitalClock = ({time}) => (
     <Box align="center" justify="start" pad="small">
-      <DClock type="digital" size="large" timezone="Poland"/>
+      <DClock type="digital" size="large"  time={new Date(time).toISOString()}/>
     </Box>
 
 );
 
 class App extends Component {
 
-state = { sidebar: true };
+state = { sidebar: true, time: Date.now()+ 7.2e+6};
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: Date.now() + 7.2e+6}), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
   render() {
     const { sidebar } = this.state;
@@ -102,9 +109,13 @@ state = { sidebar: true };
               <Heading size="small" >Optimal Traffic Control</Heading>
             </Button>
             {/* <Text><a href="/login">Log In</a></Text>  */}
-            <DigitalClock />
-            {/* <cClock format={'HH:mm:ss'} ticking={true} timezone={'Poland'}></cClock> */}
+            <div><DigitalClock time={this.state.time}/>
+            <Text>(GMT+2) EU/Warsaw</Text></div>
+            {/* <ReactFitText>
+            <cClock format={'HH:mm:ss'} style={{fontSize: '100.5em'}} ticking={true} timezone={'US/Pacific'} />
+            </ReactFitText> */}
           </Box>
+
           {sidebar && (
             <Box
               gridArea="sidebar"
