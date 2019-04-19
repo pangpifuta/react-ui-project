@@ -196,11 +196,11 @@ class Stat extends Component {
   state = { data: DATA };
 
   fetchData(){
-    var path = 'stat'
+    var path = '/api/stat'
     fetch(path)
-    .then((Response) => Response.json())
+    // .then((Response) => Response.json())
     .then((res) => {
-
+        console.log("Yay!", res)
     })
 }
 
@@ -223,6 +223,7 @@ class Stat extends Component {
 
   render() {
     const { data: servedData } = this.state;
+    this.fetchData()
     return (
       <Grommet theme={grommet}>
         <Box align="center" pad="large">

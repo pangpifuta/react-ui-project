@@ -36,7 +36,7 @@ class RealTimeOptimization extends Component {
       }
     
       fetchData(){
-        var path = 'initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + 
+        var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + 
         '&generation=' + this.state.generation + '&numOfInd=' + this.state.numOfInd
         fetch(path)
         .then((Response) => Response.json())

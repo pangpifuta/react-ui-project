@@ -33,3 +33,6 @@ def initialize(request):
     print("Optimization:", optimization2(
         {"numIndividuals2": individuals, "timeSteps": 2, "populationGA2": None, "numGeneration2": 1}))
     return http.HttpResponse()
+
+def stat(request):
+    return http.HttpResponse()
