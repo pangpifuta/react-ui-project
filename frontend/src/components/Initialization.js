@@ -47,7 +47,7 @@ class Initialization extends Component {
 
       
       fetchData(){
-          var path = 'initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration='+ this.state.hour*60+this.state.minute
+          var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration='+ this.state.hour*60+this.state.minute
           '&generation=' + this.state.generation + '&numOfInd=' + this.state.numOfInd
           fetch(path)
           .then((Response) => Response.json())
