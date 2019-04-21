@@ -16,7 +16,6 @@ class Controller:
         self.timeSteps = params["timeSteps"]
         self.paramsListGA1 = ["crossover", "mutate", "select", "populationGA1", "numGeneration1", "crossroads", "timeSteps", "numIndividuals1", "fitnessGA1", "simulator", "minLim", "maxLim"]
         self.paramsGA1 = dict((k, params[k]) for k in self.paramsListGA1 if k in params)
-        self.positions = {}
 
     def addTimeStep(self, bestIndividuals):
         ga1 = GA1(self.paramsGA1)
@@ -39,22 +38,35 @@ class Controller:
         print(self.positions[0])
         return newPopulation
 
+    def run2(self):
+        self.paramsGA1["simulator"].clear()
+        ga1 = GA1(self.paramsGA1)
+        bestIndividual = ga1.run()[0]
+        positions = {}
+        for i in range(self.timeSteps):
+            positions[i] = self.paramsGA1["simulator"].getPositions(bestIndividual[i*self.params["crossroads"]:(i+1)*self.params["crossroads"]])
+        self.params["simulator"].exit()
+        return positions, bestIndividual
+
     def run1(self):
-        timeStep = 1
+        timeStep = 0
         newPopulation = []
-        while timeStep<=self.timeSteps:
+        while timeStep<self.timeSteps:
             self.paramsGA1["simulator"].clear()
             self.paramsGA1["timeSteps"] = timeStep
             ga1 = GA1(self.paramsGA1)
             bestIndividuals = ga1.run()
             newPopulation = self.addTimeStep(bestIndividuals)
             self.paramsGA1["populationGA1"] = newPopulation
-            if timeStep<=self.timeSteps//2:
+            if timeStep<=(self.timeSteps-1)//2:
                 timeStep*=2
-            elif timeStep < self.timeSteps and timeStep > self.timeSteps//2:
-                timeStep=self.timeSteps
-            elif timeStep==self.timeSteps:
+            elif timeStep < (self.timeSteps-1) and timeStep > (self.timeSteps-1)//2:
+                timeStep=(self.timeSteps-1)
+            elif timeStep==(self.timeSteps-1):
                 break
+        bestIndividual = newPopulation[0]
+        for i in range(self.timeSteps):
+            self.positions[i] = self.paramsGA1["simulator"].getPositions(bestIndividual[i*self.params["crossroads"]:(i+1)*self.params["crossroads"]])
         self.params["simulator"].exit()
         return newPopulation
 
@@ -74,13 +86,12 @@ def optimization1(params):
                         "fitnessGA1": "1",
                         "minLim": 0,
                         "maxLim": 119}
-                        
     controller = Controller({**params, **preDefinedParams})
-    return controller.run1()
+    return controller.run2()
 
-params = {"numGeneration1": 10,
-          "timeSteps": 10,
+params = {"numGeneration1": 2,
+          "timeSteps": 2,
           "intervalSize": 120,
-          "numIndividuals1": 50,}
+          "numIndividuals1": 4,}
 
-optimization1(params)
+print(optimization1(params))
