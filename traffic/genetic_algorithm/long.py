@@ -11,7 +11,6 @@ import math
 import copy
 from .simulator import Simulator
 
-
 class GA1:
     def __init__(self, params):
         self.crossover = copy.deepcopy(params["crossover"])
@@ -27,8 +26,7 @@ class GA1:
         self.simulator = params["simulator"]
         self.fitness = params["fitnessGA1"]
         creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
-        creator.create("Individual", array.array, typecode='b',
-                       fitness=creator.FitnessMin)
+        creator.create("Individual", array.array, typecode='b', fitness=creator.FitnessMin)
 
         self.toolbox = base.Toolbox()
 
@@ -36,14 +34,10 @@ class GA1:
         self.toolbox.register("random", random.randint, minLim, maxLim)
 
         # Structure initializers
-        self.toolbox.register("individual", tools.initRepeat, creator.Individual,
-                              self.toolbox.random, self.crossroads*self.timeSteps)
-        self.toolbox.register("small_individual", tools.initRepeat,
-                              creator.Individual, self.toolbox.random, self.crossroads)
-        self.toolbox.register("population", tools.initRepeat,
-                              list, self.toolbox.individual)
-        self.toolbox.register(
-            "small_population", tools.initRepeat, list, self.toolbox.small_individual)
+        self.toolbox.register("individual", tools.initRepeat, creator.Individual, self.toolbox.random, self.crossroads*self.timeSteps)
+        self.toolbox.register("small_individual", tools.initRepeat, creator.Individual, self.toolbox.random, self.crossroads)
+        self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
+        self.toolbox.register("small_population", tools.initRepeat, list, self.toolbox.small_individual)
         self.toolbox.register("mate", self.crossover["operator"])
         del self.crossover["operator"]
         self.toolbox.register("mutate", self.mutate["operator"])
@@ -55,17 +49,15 @@ class GA1:
     def fitnessFunction(self, population):
         self.simulator.clear()
         fitnesses = [(3, )]*self.numIndividuals
-        signals = numpy.ndarray(
-            (self.numIndividuals, self.timeSteps, self.crossroads), dtype=numpy.uint8)
+        signals = numpy.ndarray((self.numIndividuals, self.timeSteps, self.crossroads), dtype = numpy.uint8)
         for individual in range(self.numIndividuals):
             for timeStep in range(self.timeSteps):
-                timings = population[individual][self.crossroads *
-                                                 timeStep:self.crossroads*(timeStep+1)]
+                timings = population[individual][self.crossroads*timeStep:self.crossroads*(timeStep+1)]
                 signals[individual][timeStep] = timings
-        if self.fitness == "1":
-            fitnesses = self.simulator.getFitness1(signals, rm=True)
-        elif self.fitness == "2":
-            fitnesses = self.simulator.getFitness2(signals, rm=True)
+        if self.fitness=="1":
+            fitnesses = self.simulator.getFitness1(signals, rm = True)
+        elif self.fitness=="2":
+            fitnesses = self.simulator.getFitness2(signals, rm = True)
         for ind, fit in zip(population, fitnesses):
             print(ind, fit)
             ind.fitness.values = fit
@@ -75,13 +67,12 @@ class GA1:
         signalTimings = self.toolbox.small_population(n=self.numIndividuals)
         index = 0
         for individual in self.population:
-            temp = individual[self.crossroads *
-                              timeStep:self.crossroads*(timeStep+1)]
+            temp = individual[self.crossroads*timeStep:self.crossroads*(timeStep+1)]
             small_individual = self.toolbox.small_individual()
             for i in range(len(temp)):
                 small_individual[i] = temp[i]
             signalTimings[index] = small_individual
-            index += 1
+            index+=1
         return signalTimings
 
     def getDensities(self, timeStep):
@@ -94,9 +85,9 @@ class GA1:
             for child2 in bestIndividuals:
                 temp1 = child1.__deepcopy__({})
                 temp2 = child2.__deepcopy__({})
-                if(temp1 == temp2):
+                if(temp1==temp2):
                     offspring[index] = temp1
-                    index += 1
+                    index+=1
                 else:
                     params_crossover = copy.deepcopy(self.crossover)
                     params_crossover["ind1"] = temp1
@@ -105,22 +96,22 @@ class GA1:
                     del params_crossover
                     offspring[index] = temp1
                     offspring[index+1] = temp2
-                    index += 2
-                if (index >= len(offspring)-2):
+                    index+=2
+                if (index>=len(offspring)-2):
                     break
-            if (index >= len(offspring)-2):
+            if (index>=len(offspring)-2):
                 break
-# for mutant in offspring:
+##        for mutant in offspring:
 ##            params_mutate = copy.deepcopy(self.mutate)
 ##            params_mutate["individual"] = mutant
-# self.toolbox.mutate(**params_mutate)
+##            self.toolbox.mutate(**params_mutate)
 ##            del params_mutate
         return offspring
 
     def selectIndividuals(self, pop):
         params_select = copy.deepcopy(self.select)
         params_select["individuals"] = pop
-        bestIndividual = self.toolbox.selectBest(k=1, individuals=pop)
+        bestIndividual = self.toolbox.selectBest(k = 1, individuals = pop)
         bestIndividuals = self.toolbox.select(**params_select)
         bestIndividuals[0] = bestIndividual[0]
         print("Selected individuals:")
@@ -150,12 +141,11 @@ class GA1:
         toRemove = []
         for i in range(len(pop)):
             for j in range(len(pop)):
-                if i != j and i not in toRemove and j not in toRemove:
-                    matches = len(
-                        [a for a, b in zip(pop[i], pop[j]) if a == b])
-                    if (matches*100)/(self.crossroads*self.timeSteps) > 70:
+                if i!=j and i not in toRemove and j not in toRemove:
+                    matches = len([a for a, b in zip(pop[i], pop[j]) if a == b])
+                    if (matches*100)/(self.crossroads*self.timeSteps)>70:
                         toRemove.append(j)
-        toRemove.sort(reverse=True)
+        toRemove.sort(reverse = True)
         print(toRemove)
         for j in range(len(toRemove)):
             del pop[toRemove[j]]
@@ -173,18 +163,18 @@ class GA1:
         worst = min([ind.fitness.values[0] for ind in pop])
         bestFitness = 0
         bestIndividuals = None
-
+        
         for generation in range(self.numGeneration):
             self.printStats(worst, pop, generation)
 ##            pop = self.removeDuplicates(pop)
             bestIndividuals = self.selectIndividuals(pop)
-            if (generation == self.numGeneration-1):
+            if (generation==self.numGeneration-1):
                 break
             offspring = self.makePopulation(bestIndividuals)
             print("Generation " + str(generation+2))
             fitnesses = self.fitnessFunction(offspring)
             pop[:] = offspring
             fits = [ind.fitness.values[0] for ind in pop]
-
+        
         self.population = pop
         return bestIndividuals
