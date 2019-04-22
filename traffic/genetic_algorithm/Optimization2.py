@@ -88,6 +88,6 @@ def optimization2(params):
                         "minLim": 0,
                         "maxLim": 119}
                             
-    # controller = Controller({**params, **preDefinedParams})
-    # for i in range(params["timeSteps"]):
-    #     controller.run(i)
+    controller = Controller({**params, **preDefinedParams})
+    for i in range(params["timeSteps"]):
+        controller.run(i)
