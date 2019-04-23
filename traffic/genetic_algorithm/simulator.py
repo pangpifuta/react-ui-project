@@ -24,9 +24,7 @@ class Simulator:
         self.useSave = False
         self.previousSave = 0
         self.previousSave2 = 0
-        self.sshClient = self.openConnection(
-            "35.178.166.231", 22, "ubuntu", paramiko.RSAKey.from_private_key_file(
-                os.path.join(os.path.dirname(__file__), r"alokprivatekey.pem")))        
+        self.sshClient = self.openConnection("35.178.166.231", 22, "ubuntu", paramiko.RSAKey.from_private_key_file(r"alokprivatekey.pem"))
         self.TSF_instances = 9
 
     def openConnection(self, hostname, port, username, key):
@@ -86,6 +84,7 @@ class Simulator:
 
 ##Method 3: Use a virtual machine provided by Dr. Pawel Gora
     def requestStats3(self, i):
+        time.sleep(random.randint(1, 3))
         timings = [int(j) for j in self.timings[i].tolist()]
         request = r'TSF1/TSF1/SingleSimulation.exe '
         for timing in timings:
