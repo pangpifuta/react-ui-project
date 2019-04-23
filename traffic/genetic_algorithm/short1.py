@@ -1,6 +1,6 @@
 import array
 import random
-from .long import GA1
+from long import GA1
 import numpy
 import math
 from deap import algorithms
@@ -140,4 +140,4 @@ class GA2:
                 
             pop[:] = offspring
             fits = [ind.fitness.values[0] for ind in pop]
-        return bestFitness, bestIndividual
+        return bestFitness, (worstFitness - bestFitness)*100/worstFitness, bestIndividual
