@@ -12,7 +12,22 @@ class RegView(viewsets.ModelViewSet):       # add this
     queryset = reg.objects.all()              # add this
 
 
-def optimize(request):
+def region = request.GET['region']
+
+
+timestep = int(request.GET['timestep'])
+duration = int(request.GET['duration'])
+generation = int(request.GET['generation'])
+individuals = int(request.GET['individuals'])
+print(region, timestep, duration, generation, individuals)
+popga2 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+           11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
+print("Optimization:", optimization2(
+    {"numIndividuals2": individuals, "timeSteps": 2, "populationGA2": None, "numGeneration2": 1}))
+return http.HttpResponse()
+
+
+def initialize(request):
     region = request.GET['region']
     duration = request.GET['duration']
     generation = request.GET['generation']
@@ -20,19 +35,6 @@ def optimize(request):
     print(region, duration, generation, individuals)
     return http.HttpResponse()
 
-
-def initialize(request):
-    region = request.GET['region']
-    timestep = int(request.GET['timestep'])
-    duration = int(request.GET['duration'])
-    generation = int(request.GET['generation'])
-    individuals = int(request.GET['individuals'])
-    print(region, timestep, duration, generation, individuals)
-    popga2 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-               11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
-    print("Optimization:", optimization2(
-        {"numIndividuals2": individuals, "timeSteps": 2, "populationGA2": None, "numGeneration2": 1}))
-    return http.HttpResponse()
 
 def stat(request):
     return http.HttpResponse()

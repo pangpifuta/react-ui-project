@@ -55,6 +55,10 @@ class Initialization extends Component {
                 
           })
       }
+
+      componentDidMount() {
+        this.fetchData()
+      }
     
     
       render() {

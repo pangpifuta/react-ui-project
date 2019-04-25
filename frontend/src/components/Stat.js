@@ -192,6 +192,8 @@ const GroupedDataTable = () => (
   </Grommet>
 );
 
+
+
 class Stat extends Component {
   state = { data: DATA };
 
@@ -202,7 +204,10 @@ class Stat extends Component {
     .then((res) => {
         console.log("Yay!", res)
     })
-}
+  }
+  componentDidMount() {
+    this.fetchData()
+  }
 
 
   onSearch = search => {
@@ -252,8 +257,6 @@ class ControlledDataTable extends Component {
   state = {
     checked: []
   };
-
-
 
   onCheck = (event, value) => {
     const { checked } = this.state;

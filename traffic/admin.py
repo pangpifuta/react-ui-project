@@ -1,8 +1,11 @@
-from django.contrib import admin
+# from django.contrib import optinfo
 
-# Register your models here.
-from .models import reg
+# # Register your models here.
+# from .models import reg
 
-class regAdmin(admin.ModelAdmin):
-    list_display = ('username', 'password', 'email')
-admin.site.register(reg,regAdmin)
+
+# class addOptimizationInfo(optinfo.ModelOptinfo):
+#     list_display = ('saving_name', 'location', 'date', 'redu_percent')
+
+# optinfo.site.register(reg, addOptinfo)
+pass
