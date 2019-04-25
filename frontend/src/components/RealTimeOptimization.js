@@ -34,6 +34,10 @@ class RealTimeOptimization extends Component {
         let path = `./signup`;
         this.props.history.push(path);
       }
+
+      componentDidMount() {
+        this.fetchData()
+      }
     
       fetchData(){
         var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + 

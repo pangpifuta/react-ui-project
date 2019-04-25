@@ -9,14 +9,19 @@ import os.path
 import pickle
 import numpy as np
 
+
 class Controller:
     def __init__(self, params):
         self.params = params
         self.timeSteps = params["timeSteps"]
-        self.paramsListGA1 = ["crossover", "mutate", "select", "numGeneration1", "crossroads", "timeSteps", "numIndividuals1", "fitnessGA1", "simulator", "minLim", "maxLim"]
-        self.paramsGA1 = dict((k, params[k]) for k in self.paramsListGA1 if k in params)
-        self.paramsListGA2 = ["crossover", "mutate", "select", "numGeneration2", "crossroads", "numIndividuals2", "timeStep", "fitnessGA2", "simulator", "densities", "population", "minLim", "maxLim"]
-        self.paramsGA2 = dict((k, params[k]) for k in self.paramsListGA2 if k in params)
+        self.paramsListGA1 = ["crossover", "mutate", "select", "numGeneration1", "crossroads",
+                              "timeSteps", "numIndividuals1", "fitnessGA1", "simulator", "minLim", "maxLim"]
+        self.paramsGA1 = dict((k, params[k])
+                              for k in self.paramsListGA1 if k in params)
+        self.paramsListGA2 = ["crossover", "mutate", "select", "numGeneration2", "crossroads", "numIndividuals2",
+                              "timeStep", "fitnessGA2", "simulator", "densities", "population", "minLim", "maxLim"]
+        self.paramsGA2 = dict((k, params[k])
+                              for k in self.paramsListGA2 if k in params)
         self.ga1 = GA1(self.paramsGA1)
 
     def run1(self):
@@ -25,7 +30,7 @@ class Controller:
         pickle.dump(individual, f)
         f.close()
         self.params["simulator"].exit()
-        
+
     def run2(self):
         self.ga1.run()
         self.params["simulator"].changeRoutes()
@@ -40,6 +45,7 @@ class Controller:
             ga2.run()
             print("*"*40)
         self.params["simulator"].exit()
+
 
 NUM_INDIVIDUALS = 40
 LOW = 0
@@ -60,5 +66,5 @@ params = {"crossover": {"operator": tools.cxOnePoint},
           "fitnessGA2": "1",
           "minLim": LOW,
           "maxLim": UP}
-controller = Controller(params)
-controller.run1()
+# controller = Controller(params)
+# controller.run1()

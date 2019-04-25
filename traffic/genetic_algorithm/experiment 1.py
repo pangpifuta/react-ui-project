@@ -9,12 +9,15 @@ import os.path
 import pickle
 import numpy as np
 
+
 class Controller:
     def __init__(self, params):
         self.params = params
         self.timeSteps = params["timeSteps"]
-        self.paramsListGA1 = ["crossover", "mutate", "select", "populationGA1", "numGeneration1", "crossroads", "timeSteps", "numIndividuals1", "fitnessGA1", "simulator", "minLim", "maxLim"]
-        self.paramsGA1 = dict((k, params[k]) for k in self.paramsListGA1 if k in params)
+        self.paramsListGA1 = ["crossover", "mutate", "select", "populationGA1", "numGeneration1",
+                              "crossroads", "timeSteps", "numIndividuals1", "fitnessGA1", "simulator", "minLim", "maxLim"]
+        self.paramsGA1 = dict((k, params[k])
+                              for k in self.paramsListGA1 if k in params)
         self.ga1 = GA1(self.paramsGA1)
 
     def run1(self):
@@ -22,7 +25,8 @@ class Controller:
         individual, improvement = self.ga1.run()
         self.params["simulator"].exit()
         return score
-        
+
+
 NUM_INDIVIDUALS = 9
 LOW = 0
 UP = 119

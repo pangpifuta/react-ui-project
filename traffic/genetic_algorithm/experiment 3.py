@@ -9,13 +9,16 @@ import os.path
 import pickle
 import numpy as np
 
+
 class Controller:
     def __init__(self, params):
         self.params = params
         self.timeSteps = params["timeSteps"]
-        self.paramsListGA2 = ["crossover", "mutate", "select", "numGeneration2", "crossroads", "numIndividuals2", "timeStep", "fitnessGA2", "simulator", "densities", "population", "minLim", "maxLim"]
-        self.paramsGA2 = dict((k, params[k]) for k in self.paramsListGA2 if k in params)
-        
+        self.paramsListGA2 = ["crossover", "mutate", "select", "numGeneration2", "crossroads", "numIndividuals2",
+                              "timeStep", "fitnessGA2", "simulator", "densities", "population", "minLim", "maxLim"]
+        self.paramsGA2 = dict((k, params[k])
+                              for k in self.paramsListGA2 if k in params)
+
     def run2(self):
         timings = []
         self.params["simulator"].clear()
@@ -27,7 +30,7 @@ class Controller:
             ga2 = GA2(self.paramsGA2)
             best, population = ga2.run()
             timings.append(population[0])
-            fitness+=best
+            fitness += best
             self.params["simulator"].setState(population)
             print(fitness)
             print(timings)
@@ -35,6 +38,7 @@ class Controller:
         print(timings)
         self.params["simulator"].exit()
         return ((worstFitness-bestFitness)/worstFitness)*100
+
 
 NUM_INDIVIDUALS = 50
 LOW = 0
