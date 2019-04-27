@@ -1,6 +1,6 @@
-from long import GA1
-from short1 import GA2
-from simulator import Simulator
+from .long import GA1
+from .short1 import GA2
+from .simulator import Simulator
 import time
 from deap import tools
 import math
