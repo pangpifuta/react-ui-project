@@ -23,7 +23,7 @@ class Initialization extends Component {
           hr: 0,
           min: 0,
           generation: 0,
-          numOfInd: 0,
+          noOfInd: 0,
           loading: false
         };
 
