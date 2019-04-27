@@ -9,6 +9,7 @@ class reg(models.Model):
     #email = models.EmailField()
     saving_name = models.CharField(max_length=20)
     date = models.DateField()
+    time = models.TimeField()
     redu_percent = models.IntegerField()
 
     def _str_(self):
