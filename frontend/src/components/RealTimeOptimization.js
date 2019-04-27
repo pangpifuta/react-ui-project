@@ -17,6 +17,7 @@ class RealTimeOptimization extends Component {
 
         this.state = {
           region: '',
+          timeStep: 0,
           timeDur: 0, //units in seconds
           hr: 0,
           min: 0,
@@ -44,7 +45,7 @@ class RealTimeOptimization extends Component {
       fetchData(){
         this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
-        var path = '/api/optimization?region=' + this.state.region + '&duration=' + this.state.timeDur + 
+        var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration=' +this.state.timeDur + 
         '&generation=' + this.state.generation + '&individuals=' + this.state.noOfInd
         fetch(path)
         // .then((Response) => Response.json())
@@ -97,6 +98,15 @@ class RealTimeOptimization extends Component {
               <Text>Time Step</Text>
               <SimpleNumberInput min={1} defaultValue={1}/>
               </FormField> */}
+
+              <FormField>
+              <Text>Time Step</Text>
+              <NumberInput min={1} defaultValue={1} value={this.state.timeStep} onChange={event => {
+                      this.setState({
+                        timeStep: event.target.value
+                      });
+                     }}/>
+              </FormField>
 
               <Text>Time Duration</Text>
               <Box direction='row'>
