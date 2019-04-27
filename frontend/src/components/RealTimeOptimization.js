@@ -17,7 +17,7 @@ class RealTimeOptimization extends Component {
 
         this.state = {
           region: '',
-          timeDur: 0,
+          timeDur: 0, //units in seconds
           hr: 0,
           min: 0,
           generation: 0,
@@ -42,7 +42,7 @@ class RealTimeOptimization extends Component {
       }
     
       fetchData(){
-        this.state.timeDur = parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10)
+        this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
         var path = '/api/optimization?region=' + this.state.region + '&duration=' + this.state.timeDur + 
         '&generation=' + this.state.generation + '&individuals=' + this.state.noOfInd

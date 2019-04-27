@@ -19,7 +19,7 @@ class Initialization extends Component {
         this.state = {
           region: '',
           timeStep: 0,
-          timeDur: 0,
+          timeDur: 0, //unit in seconds
           hr: 0,
           min: 0,
           generation: 0,
@@ -51,7 +51,7 @@ class Initialization extends Component {
 
       
       fetchData(){
-        this.state.timeDur = parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10)
+        this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
         var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration=' +this.state.timeDur + 
         '&generation=' + this.state.generation + '&individuals=' + this.state.noOfInd
