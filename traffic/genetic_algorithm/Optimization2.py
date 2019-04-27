@@ -76,7 +76,6 @@ class Controller:
 # "populationGA2": obtained from optimzation1}
 
 def optimization2(params):
-
     NUM_INDIVIDUALS = params["numIndividuals2"]
     preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
                         "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
@@ -92,13 +91,13 @@ def optimization2(params):
     for i in range(params["timeSteps"]):
         controller.run(i)
 
- params = {"numGeneration2": 10,
-           "timeSteps": 10,
-           "intervalSize": 120,
-           "numIndividuals2": 50,
-           "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
+# params = {"numGeneration2": 10,
+#           "timeSteps": 10,
+#           "intervalSize": 120,
+#           "numIndividuals2": 50,
+#           "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
 
-optimization2(params)
+# optimization2(params)
 # params = {"numGeneration2": 10,
 #           "timeSteps": 10,
 #           "intervalSize": 120,
