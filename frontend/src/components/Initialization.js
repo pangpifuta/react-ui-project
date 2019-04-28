@@ -22,8 +22,8 @@ class Initialization extends Component {
           timeDur: 0, //unit in seconds
           hr: 0,
           min: 0,
-          generation: 0,
-          noOfInd: 0,
+          generation: 1,
+          noOfInd: 10,
           loading: false
         };
 
@@ -140,7 +140,7 @@ class Initialization extends Component {
               <Box>
               <FormField>
               <Text>Generation</Text>
-              <NumberInput min={1} defaultValue={1} value={generation} onChange={event => {
+              <NumberInput min={1}  value={generation} onChange={event => {
                       this.setState({
                         generation: event.target.value
                       });
@@ -151,7 +151,7 @@ class Initialization extends Component {
               <Box>
               <FormField>
               <Text>Number of Individuals</Text>
-              <NumberInput min={0}  step={1000} defaultValue={0} value={noOfInd} onChange={event => {
+              <NumberInput min={1000}  step={10}  value={noOfInd} onChange={event => {
                           this.setState({
                             noOfInd: event.target.value
                           });

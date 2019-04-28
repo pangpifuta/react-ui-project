@@ -51,6 +51,7 @@ class Controller:
         return fitness
 
     def run(self, timeStep):
+        print("It's working")
         newPopulation = self.params["populationGA2"]
         if newPopulation is not None:
             population = []
@@ -75,21 +76,6 @@ class Controller:
 # "numIndividuals2": 50,
 # "populationGA2": obtained from optimzation1}
 
-def optimization2(params):
-    NUM_INDIVIDUALS = params["numIndividuals2"]
-    preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
-                        "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
-                        "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
-                        "crossroads": 21,
-                        "densities": None,
-                        "simulator": Simulator(10, 2, 3),
-                        "fitnessGA2": "1",
-                        "minLim": 0,
-                        "maxLim": 119}
-
-    controller = Controller({**params, **preDefinedParams})
-    for i in range(params["timeSteps"]):
-        controller.run(i)
 
 # params = {"numGeneration2": 10,
 #           "timeSteps": 10,

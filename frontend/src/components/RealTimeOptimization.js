@@ -17,12 +17,12 @@ class RealTimeOptimization extends Component {
 
         this.state = {
           region: '',
-          timeStep: 0,
+          timeStep: 1,
           timeDur: 0, //units in seconds
           hr: 0,
           min: 0,
-          generation: 0,
-          noOfInd: 0,
+          generation: 1,
+          noOfInd: 10,
           loading: false
         };
 
@@ -39,18 +39,24 @@ class RealTimeOptimization extends Component {
         this.props.history.push(path);
       }
 
+      onResult = () => {
+        let path = `./result`;
+        this.props.history.push(path);
+      }
+
       componentDidMount() {
       }
     
       fetchData(){
         this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
-        var path = '/api/initialization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration=' +this.state.timeDur + 
+        var path = '/api/optimization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration=' +this.state.timeDur + 
         '&generation=' + this.state.generation + '&individuals=' + this.state.noOfInd
         fetch(path)
         // .then((Response) => Response.json())
         .then((res) => {
             this.state = false
+            this.onResult
         })
     }
     
@@ -101,7 +107,7 @@ class RealTimeOptimization extends Component {
 
               <FormField>
               <Text>Time Step</Text>
-              <NumberInput min={1} defaultValue={1} value={this.state.timeStep} onChange={event => {
+              <NumberInput min={1} value={this.state.timeStep} onChange={event => {
                       this.setState({
                         timeStep: event.target.value
                       });
@@ -111,7 +117,7 @@ class RealTimeOptimization extends Component {
               <Text>Time Duration</Text>
               <Box direction='row'>
               <Box style={{ width: 160 }} >
-              <NumberInput min={0} defaultValue={0} suffix=' hr' value={hr} onChange={event => {
+              <NumberInput min={0}  suffix=' hr' value={hr} onChange={event => {
                       this.setState({
                         hr: event.target.value
                       });
@@ -119,7 +125,7 @@ class RealTimeOptimization extends Component {
               />
               </Box>
               <Box style={{ width: 170 }} >
-              <NumberInput min={0} max={59} defaultValue={0} suffix=' min' value={min} onChange={event => {
+              <NumberInput min={0} max={59} suffix=' min' value={min} onChange={event => {
                       this.setState({
                         min: event.target.value
                       });
@@ -132,7 +138,7 @@ class RealTimeOptimization extends Component {
               <Box>
               <FormField>
               <Text>Generation</Text>
-              <NumberInput min={1} defaultValue={1} value={generation} onChange={event => {
+              <NumberInput min={1} value={generation} onChange={event => {
                       this.setState({
                         generation: event.target.value
                       });
@@ -143,7 +149,7 @@ class RealTimeOptimization extends Component {
               <Box>
                 <FormField>
                   <Text>Number of Individuals</Text>
-                  <NumberInput min={0}  step={1000} defaultValue={0} value={noOfInd} onChange={event => {
+                  <NumberInput min={10}  step={10} value={noOfInd} onChange={event => {
                           this.setState({
                             noOfInd: event.target.value
                           });

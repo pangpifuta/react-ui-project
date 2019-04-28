@@ -5,6 +5,7 @@ import { Grommet, Box, DataTable, Meter, Text, CheckBox } from "grommet";
 import { grommet } from "grommet/themes";
 import { Text as GrommetText } from "grommet"
 import Parser from './Parser'
+import {Time} from "react";
 
 const amountFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -13,12 +14,12 @@ const amountFormatter = new Intl.NumberFormat("en-US", {
 });
 
 const columns = [
-  {
-    property: "name",
-    header: <Text>Saving Name</Text>,
-    primary: true,
-    // footer: "Total"
-  },
+  // {
+  //   property: "name",
+  //   header: <Text>Saving Name</Text>,
+  //   primary: true,
+  //   // footer: "Total"
+  // },
   {
     property: "location",
     header: "Location"
@@ -31,8 +32,12 @@ const columns = [
     align: "end"
   },
   {
+    property: "createdTime",
+    header: "Created Time",
+  },
+  {
     property: "percent",
-    header: "Traffic Flow Percent Reduction",
+    header: "Improvement Percentage",
     render: datum =>
       (datum.percent >= 0 && ( //if datum.percent >=0 then do this
         <Box pad={{ vertical: "xsmall" }}>
@@ -79,7 +84,7 @@ const locations = [
 const data = [];
 for (let i = 0; i < 40; i += 1) {
   data.push({
-    name: `Name ${i + 1}`,
+    // name: `Name ${i + 1}`,
     location: locations[i % locations.length],
     date: `2018-07-${(i % 30) + 1}`,
     // percent: (i % 11) * 10,
@@ -90,56 +95,56 @@ for (let i = 0; i < 40; i += 1) {
 }
 const DATA = [
   {
-    name: "Alan",
+    // name: "Alan",
     location: "Warsaw",
     date: "",
     percent: -20,
     // paid: 0
   },
   {
-    name: "Bryan",
+    // name: "Bryan",
     location: "Fort Collins",
     date: "2018-06-10",
     percent: 30,
     // paid: 1234
   },
   {
-    name: "Chris",
+    // name: "Chris",
     location: "Palo Alto",
     date: "2018-06-09",
     percent: 40,
     // paid: 2345
   },
   {
-    name: "Eric",
+    // name: "Eric",
     location: "Palo Alto",
     date: "2018-06-11",
     percent: 80,
     // paid: 3456
   },
   {
-    name: "Doug",
+    // name: "Doug",
     location: "Fort Collins",
     date: "2018-06-10",
     percent: 60,
     // paid: 1234
   },
   {
-    name: "Jet",
+    // name: "Jet",
     location: "Palo Alto",
     date: "2018-06-09",
     percent: 40,
     // paid: 3456
   },
   {
-    name: "Michael",
+    // name: "Michael",
     location: "Boise",
     date: "2018-06-11",
     percent: 50,
     // paid: 1234
   },
   {
-    name: "Tracy",
+    // name: "Tracy",
     location: "San Francisco",
     date: "2018-06-10",
     percent: 10,
@@ -249,7 +254,7 @@ class Stat extends Component {
 
 const controlledColumns = columns.map(col => Object.assign({}, col));
 delete controlledColumns[0].footer;
-delete controlledColumns[3].footer;
+// delete controlledColumns[3].footer;
 // delete controlledColumns[4].footer;
 // delete controlledColumns[4].aggregate;
 
