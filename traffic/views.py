@@ -30,9 +30,9 @@ def optimize(request):
               "timeSteps": 1,
               "numIndividuals2": individuals,
               "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
-    print("Optimization:", optimization2(params))
+    print("Optimization:")
 
-    return http.HttpResponse(None, content_type="application/json")
+    return http.HttpResponse(optimization2(params))
 
 
 def initialize(request):
@@ -51,7 +51,9 @@ def initialize(request):
 
 
 def stat(request):
-    return http.HttpResponse(None, content_type="application/json")
+    res = http.HttpResponse()
+    res['Good'] = 20
+    return res
 
 
 def optimization2(params):
@@ -67,6 +69,6 @@ def optimization2(params):
                         "maxLim": 119}
 
     controller = Controller({**params, **preDefinedParams})
-    for i in range(params["timeSteps"]):
-        print("views.py print")
-        controller.run(i)
+    # for i in range(params["timeSteps"]):
+    # print("views.py print")
+    controller.run(0)

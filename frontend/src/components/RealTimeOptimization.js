@@ -55,8 +55,9 @@ class RealTimeOptimization extends Component {
         fetch(path)
         // .then((Response) => Response.json())
         .then((res) => {
-            this.state = false
-            this.onResult
+            console.log("Receive Response")
+            this.state.loading = false
+            this.onResult()
         })
     }
     
