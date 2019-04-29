@@ -37,7 +37,7 @@ initMap = ()=>{
     }
 
     render(){
-        const { loading } = this.state
+        // const { loading } = this.state
         const { value } = this.state;
         const { timestep } = this.state
         

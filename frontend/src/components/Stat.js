@@ -210,7 +210,7 @@ class Stat extends Component {
         console.log("Yay!", res)
     })
   }
-  componentDidMount() {
+  componentWillMount() {
     this.fetchData()
   }
 
