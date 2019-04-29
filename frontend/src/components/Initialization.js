@@ -18,7 +18,7 @@ class Initialization extends Component {
 
         this.state = {
           region: '',
-          timeStep: 0,
+          timeStep: 1,
           timeDur: 0, //unit in seconds
           hr: 0,
           min: 0,
@@ -49,6 +49,11 @@ class Initialization extends Component {
         this.setState({ minute: e.target.value });
       }
 
+      onResult = () => {
+        let path = `./result`;
+        this.props.history.push(path);
+      }
+
       
       fetchData(){
         this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
@@ -58,7 +63,9 @@ class Initialization extends Component {
           fetch(path)
           // .then((Response) => Response.json())
           .then((res) => {
-                
+            console.log("Receive Response")
+            this.state.loading = false
+            this.onResult()
           })
       }
 
@@ -110,7 +117,7 @@ class Initialization extends Component {
 
               <FormField>
               <Text>Time Step</Text>
-              <NumberInput min={1} defaultValue={1} value={this.state.timeStep} onChange={event => {
+              <NumberInput min={1} value={this.state.timeStep} onChange={event => {
                       this.setState({
                         timeStep: event.target.value
                       });
@@ -120,7 +127,7 @@ class Initialization extends Component {
               <Text>Time Duration</Text>
               <Box direction='row'>
               <Box style={{ width: 160 }} >
-              <NumberInput min={0} defaultValue={0} suffix=' hr' value={hr} onChange={event => {
+              <NumberInput min={0} suffix=' hr' value={hr} onChange={event => {
                       this.setState({
                         hr: event.target.value
                       });
@@ -128,7 +135,7 @@ class Initialization extends Component {
               />
               </Box>
               <Box style={{ width: 170 }} >
-              <NumberInput min={0} max={59} defaultValue={0} suffix=' min' value={min} onChange={event => {
+              <NumberInput min={0} max={59} suffix=' min' value={min} onChange={event => {
                       this.setState({
                         min: event.target.value
                       });
@@ -151,7 +158,7 @@ class Initialization extends Component {
               <Box>
               <FormField>
               <Text>Number of Individuals</Text>
-              <NumberInput min={1000}  step={10}  value={noOfInd} onChange={event => {
+              <NumberInput min={10}  step={10}  value={noOfInd} onChange={event => {
                           this.setState({
                             noOfInd: event.target.value
                           });
