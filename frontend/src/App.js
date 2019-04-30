@@ -151,14 +151,6 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
                 </SidebarButton>
               )
               )}
-              {["Statistics"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<BarChart/>} label="Statistics" href="/stat" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
-                   <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
-                    <Text>{name}</Text>
-                   </Box> 
-                </SidebarButton>
-              )
-              )}
               
             </Box>
           )}
