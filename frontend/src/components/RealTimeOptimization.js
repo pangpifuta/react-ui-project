@@ -23,6 +23,7 @@ class RealTimeOptimization extends Component {
           min: 0,
           generation: 1,
           noOfInd: 10,
+          selectedFile: null,
           loading: false
         };
 
@@ -85,7 +86,8 @@ class RealTimeOptimization extends Component {
                 logoSrc='https://upload.wikimedia.org/wikipedia/commons/a/a3/Nuvola_apps_ksysv.png'
             > 
             <Grommet theme={grommet}>
-            <Box align="center" pad="medium">
+            <Box align="center" pad="medium" background="light-4">
+            <Box pad="medium" background="#ffffff">
             <div>
                 <FormField>
                   <Text>Region</Text>
@@ -158,6 +160,12 @@ class RealTimeOptimization extends Component {
                   />
                 </FormField>
               </Box>
+              {/* here */}
+              <Box>
+              <Text>GA2</Text>
+              <input type="file" name="file" onChange={this.onChangeHandler}/>
+              </Box>
+              {/* end */}
 
               {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
 
@@ -174,6 +182,7 @@ class RealTimeOptimization extends Component {
               </LoadingScreen>
 
               </div>
+              </Box>
               </Box>
               
           </Grommet>

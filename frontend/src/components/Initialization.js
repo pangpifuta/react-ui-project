@@ -98,7 +98,8 @@ class Initialization extends Component {
                 logoSrc='https://upload.wikimedia.org/wikipedia/commons/a/a3/Nuvola_apps_ksysv.png'
             > 
             <Grommet theme={grommet}>
-            <Box align="center" pad="medium">
+            <Box align="center" pad="medium" background="light-4">
+            <Box pad="medium" background="#ffffff">
             <div>
                 <FormField>
                   <Text>Region</Text>
@@ -188,8 +189,11 @@ class Initialization extends Component {
               </Box>
 
               
+
+              
               
               </div>
+              </Box>
               </Box>
               
               </Grommet>

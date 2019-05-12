@@ -62,23 +62,22 @@ class Simulator:
         pass
 
     def getPositions(self, timings):
-        request = [r'.\TSF_1'+'\SingleSimulation.exe']
-        positionLocation = r'.\TSF_1\temp3_'
-        for timing in timings:
-            request.append(str(timing))
-            positionLocation += str(timing)+"_"
-        positionLocation += "saved_state_2_"+str(self.previousSave2)+"_txt_"
-        positionLocation += "saved_state_2_" + \
-            str((self.previousSave2+1) % 2)+"_txt"
-        positionLocation += "_temp3"
-        request.append("saved_state_2_"+str(self.previousSave2)+".txt")
-        request.append("saved_state_2_"+str((self.previousSave2+1) % 2)+".txt")
-        self.previousSave2 = (self.previousSave2 + 1) % 2
-        request.append("temp3")
-        result = subprocess.Popen(
-            request, stdout=subprocess.PIPE).communicate()[0]
-        positions = {}
-        with open(positionLocation+"//cars119.csv", 'r') as csvFile:
+        ##        request = [r'.\TSF_1'+'\SingleSimulation.exe']
+        ##        positionLocation = r'.\TSF_1\temp3_'
+        # for timing in timings:
+        # request.append(str(timing))
+        # positionLocation+=str(timing)+"_"
+        # positionLocation+="saved_state_2_"+str(self.previousSave2)+"_txt_"
+        # positionLocation+="saved_state_2_"+str((self.previousSave2+1)%2)+"_txt"
+        # positionLocation+="_temp3"
+        # request.append("saved_state_2_"+str(self.previousSave2)+".txt")
+        # request.append("saved_state_2_"+str((self.previousSave2+1)%2)+".txt")
+        ##        self.previousSave2 = (self.previousSave2 + 1)%2
+        # request.append("temp3")
+        ##        result = subprocess.Popen(request, stdout=subprocess.PIPE).communicate()[0]
+        ##        positions = {}
+        positionLocation = r'./TSF_1/output_1_2_3_4_5_6_7_8_9_10_11_12_13_14_15_16_17_18_19_20_22_initial_state_txt_state_55k_txt_output'
+        with open(positionLocation+"/cars119.csv", 'r') as csvFile:
             reader = csv.reader(csvFile)
             for row in reader:
                 positions[row[0]] = [row[2], row[3]]

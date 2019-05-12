@@ -155,9 +155,9 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
             </Box>
           )}
           <Box gridArea="main" justify="center" align="center" background="light-4" >
-          <div className="App-intro">
+          <div style={{width:'100%', height: '100%'}}>
            <Switch>
-             <main>
+             
              <Route exact path="/login"  component={Login} />
              {/* <Redirect exact path="/" to="currentTraffic" /> */}
              <Route exact path="/" render={() => <Redirect to="/currenttraffic" />} />
@@ -169,7 +169,7 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
              <Route path="/initialization" component={Initialization} />
              <Route path="/real-time-optimization" component={RealTimeOptimization} />
              <Route path="/result" component={Result} />
-             </main>
+             
              <Redirect to="/" />
            </Switch>
           
