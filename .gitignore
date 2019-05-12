@@ -10,7 +10,7 @@ node_modules/
 /build
 
 # large file
-/TSF_1
+TSF_1/
 
 # misc
 .DS_Store
