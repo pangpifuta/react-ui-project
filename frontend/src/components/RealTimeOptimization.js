@@ -1,13 +1,10 @@
 
 import React, { Component } from 'react'
-import SimpleSelect from "./objects/SimpleSelect";
-import SimpleRangeInput from "./objects/SimpleRangeInput";
-import SimpleNumberInput from "./objects/SimpleNumberInput";
-import { RangeInput,Select,TextInput, Text,Grommet, Box, FormField, Button } from 'grommet';
+
+import { Select, Text,Grommet, Box, FormField, Button } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { grommet } from "grommet/themes";
 import LoadingScreen from 'react-loading-screen';
-// import { NumberInput } from 'grommet/components/NumberInput';
 
 class RealTimeOptimization extends Component {
     constructor(props) {
@@ -40,26 +37,44 @@ class RealTimeOptimization extends Component {
         this.props.history.push(path);
       }
 
-      onResult = () => {
+      onResult = (params) => {
+        console.log("Parse param", params)
         let path = `./result`;
-        this.props.history.push(path);
+        this.props.history.push({
+          pathname: path,
+          state: {
+            result: params
+          }
+        });
       }
 
       componentDidMount() {
       }
-    
-      fetchData(){
+      
+      sleep = (milliseconds) => {
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+      }
+
+      async fetchData(){
         this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
         var path = '/api/optimization?region=' + this.state.region + '&timestep=' + this.state.timeStep + '&duration=' +this.state.timeDur + 
         '&generation=' + this.state.generation + '&individuals=' + this.state.noOfInd
-        fetch(path)
-        // .then((Response) => Response.json())
-        .then((res) => {
-            console.log("Receive Response")
-            this.state.loading = false
-            this.onResult()
-        })
+        console.log("Fetching Optimization2")
+        var res = await fetch(path)
+        var flag = false  
+        var checkpath = '/api/checkoptimization'
+        while(!flag){
+          await this.sleep(30000)
+          res = await fetch(checkpath)
+          if (res.status == 200) {
+            flag = true
+          }
+        }
+        var resjson = await res.json()
+        console.log("Receive Response", resjson)
+        this.state.loading = false
+        this.onResult(resjson)
     }
     
       render() {
@@ -97,7 +112,6 @@ class RealTimeOptimization extends Component {
                       this.setState({
                         region: event.value
                       });
-                      console.log(event);
                     }}
                     options={["Warsaw"]} 
                   />

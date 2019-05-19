@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import './CurrentTraffic.css'
 import LoadingScreen from 'react-loading-screen';
+import {  Box} from 'grommet';
 
 
 export class CurrentTraffic extends Component {
@@ -26,8 +26,9 @@ export class CurrentTraffic extends Component {
 
 
 initMap = ()=>{
+    var latlng = new window.google.maps.LatLng(52.2297, 21.0122);
     var map = new window.google.maps.Map(document.getElementById('map'), {
-        center: {lat: 52.2297, lng: 21.0122},
+        center: latlng,
         zoom: 13
       });
       var trafficLayer = new window.google.maps.TrafficLayer();
@@ -38,18 +39,10 @@ initMap = ()=>{
         const { loading } = this.state
 
         return(
-        <main>
 
-        <LoadingScreen
-            loading={loading}
-            bgColor='#f1f1f1'
-            spinnerColor='#9ee5f8'
-            textColor='#676767'
-            logoSrc='https://upload.wikimedia.org/wikipedia/commons/a/a3/Nuvola_apps_ksysv.png'
-        > 
                 <div id="map"></div>
-        </LoadingScreen>
-        </main>
+
+        
 
         )
     }

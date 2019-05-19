@@ -1,8 +1,6 @@
 import React from 'react';
 import Papa from 'papaparse';
 import { withRouter } from 'react-router-dom';
-import http from 'http';
-import fs from 'fs'
 
 
 class Parser extends React.Component {

@@ -9,6 +9,14 @@ from .genetic_algorithm.Optimization1 import optimization1
 from deap import tools
 import math
 from .genetic_algorithm.simulator import Simulator
+import os
+import threading
+import json
+
+FinishedOptimize = False
+StorageOptimize = ()
+FinishedInitialize = False
+StorageInitialize = ()
 
 
 class RegView(viewsets.ModelViewSet):       # add this
@@ -21,18 +29,38 @@ def optimize(request):
     duration = int(request.GET['duration'])
     generation = int(request.GET['generation'])
     individuals = int(request.GET['individuals'])
+    timeSteps = int(request.GET['timestep'])
     print(region, duration, generation, individuals)
     # popga2 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     #            11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
     params = {"region": region,
               "numGeneration2": generation,
               "intervalSize": duration,
-              "timeSteps": 1,
+              "timeSteps": timeSteps,
               "numIndividuals2": individuals,
               "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
-    print("Optimization:")
+    print("Optimizing")
+    threading.Thread(target=process, args=(params, )).start()
+    print("Started threading!")
+    return http.HttpResponse("Success")
 
-    return http.HttpResponse(optimization2(params))
+
+def process(params):
+    global FinishedOptimize, StorageOptimize
+    res = optimization2(params)
+    FinishedOptimize = True
+    StorageOptimize = res
+
+
+def checkoptimize(request):
+    global FinishedOptimize, StorageOptimize
+    if not FinishedOptimize:
+        return http.HttpResponse(status=204)
+    else:
+        print("Returning ", len(StorageOptimize),
+              StorageOptimize[0], StorageOptimize[1])
+        FinishedOptimize = False
+        return http.HttpResponse(json.dumps(StorageOptimize), content_type="application/json")
 
 
 def initialize(request):
@@ -46,8 +74,26 @@ def initialize(request):
               "timeSteps": 2,
               "intervalSize": duration,
               "numIndividuals1": individuals}
-    # print("Optimization1:", optimization1(params))
-    return http.HttpResponse(optimization1(params), content_type="application/json")
+    print("Initializing")
+    threading.Thread(target=processInitialize, args=(params, )).start()
+    return http.HttpResponse("Success")
+
+
+def processInitialize(params):
+    global FinishedInitialize, StorageInitialize
+    res = optimization1(params)
+    FinishedInitialize = True
+    StorageInitialize = res
+
+
+def checkinitialize(request):
+    global FinishedInitialize, StorageInitialize
+    if not FinishedInitialize:
+        return http.HttpResponse(status=204)
+    else:
+        print("Returning ", len(StorageInitialize))
+        FinishedInitialize = False
+        return http.HttpResponse(json.dumps(StorageInitialize), content_type="application/json")
 
 
 def stat(request):
@@ -69,6 +115,15 @@ def optimization2(params):
                         "maxLim": 119}
 
     controller = Controller({**params, **preDefinedParams})
-    # for i in range(params["timeSteps"]):
-    # print("views.py print")
-    controller.run(0)
+    print("Run Opt2 for", params["timeSteps"])
+    temp = ()
+    temp0 = []
+    temp1 = []
+    for i in range(params["timeSteps"]):
+        # print("views.py print")
+        res = controller.run(i)
+        print("iteration", i+1, "of", params["timeSteps"], "Result", len(res))
+        temp0.append(res[0])
+        temp1.append(res[1])
+    temp += (temp0, temp1, res[2],)
+    return temp

@@ -30,6 +30,8 @@ urlpatterns = [
                                           include(router.urls)),  # add this
     url(r'^api/auth/', include('knox.urls')),
     url(r'^api/optimization/$', views.optimize),
+    url(r'^api/checkoptimization/', views.checkoptimize),
     url(r'^api/initialization/$', views.initialize),
+    url(r'^api/checkinitialization/', views.checkinitialize),
     url(r'^api/stat/', views.stat)
 ]

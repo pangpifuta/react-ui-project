@@ -75,13 +75,14 @@ class Simulator:
         ##        self.previousSave2 = (self.previousSave2 + 1)%2
         # request.append("temp3")
         ##        result = subprocess.Popen(request, stdout=subprocess.PIPE).communicate()[0]
-        ##        positions = {}
-        positionLocation = r'./TSF_1/output_1_2_3_4_5_6_7_8_9_10_11_12_13_14_15_16_17_18_19_20_22_initial_state_txt_state_55k_txt_output'
+        positions = {}
+        positionLocation = os.path.join(os.path.dirname(
+            __file__), r'TSF_1/output_1_2_3_4_5_6_7_8_9_10_11_12_13_14_15_16_17_18_19_20_22_initial_state_txt_state_55k_txt_output')
         with open(positionLocation+"/cars119.csv", 'r') as csvFile:
             reader = csv.reader(csvFile)
             for row in reader:
                 positions[row[0]] = [row[2], row[3]]
-        shutil.rmtree(positionLocation)
+        # shutil.rmtree(positionLocation)
         return positions
 
     def setTimeInterval(self, intervalSize):
@@ -112,7 +113,8 @@ class Simulator:
         time.sleep(1)
         stdout.channel.recv_exit_status()
         result = stdout.read()
-##        result = random.randint(1, 10)
+# result = random.randint(1, 10)
+        print(self.fitnesses, self.fitnesses[i], self.fitnesses[i][0])
         self.fitnesses[i] = (self.fitnesses[i][0]+int(result), )
 
 # Method 2: locally run modified version of TSF
@@ -155,7 +157,7 @@ class Simulator:
                     response.content, bytes) else response.content
                 result = int(json.loads(text)['score'])
             else:
-                print("error")
+                print("error", e)
         self.fitnesses[i] = (self.fitnesses[i][0]+result, )
 
     def requestMany(self, number):
@@ -196,8 +198,8 @@ class Simulator:
 
     def getFitness3(self, population, densities, rm=False):
         fitness = []
-        for timing in timings:
-            result = self.requestStats(timing.tolist())
+        for timing in self.timings:
+            result = self.requestStats3(timing.tolist())
             fitness += result
             print(fitness)
         return fitness

@@ -1,11 +1,22 @@
 #map {
-  /* height: 828px;
-  width:1728px; */
-  height: 718px;
-  width:1240px;
+  /* height: 716px; */
+  /* width:1240px;  */
+  /* height: 20px; */
+  /* width: 20px; */
+  /* flex: 1; */
+  height:  100%;
+  width: 100%;
 }
+
+div {
+  /* height: 80%; */
+  /* width: 80%; */
+  /* margin: 0;
+  padding: 0; */
+} 
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
