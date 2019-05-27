@@ -1,6 +1,6 @@
-from .long import GA1
-from .short1 import GA2
-from .simulator import Simulator
+from long import GA1
+from short1 import GA2
+from simulator import Simulator
 import time
 from deap import tools
 import math
@@ -13,6 +13,9 @@ import numpy as np
 class Controller:
     def __init__(self, params):
         self.params = params
+        if self.params["saveLocation"] is not None:
+            file = open(self.params["saveLocation"], "rb")
+            self.params["populationGA2"] = pickle.load(file)
         self.params["simulator"].setTimeInterval(self.params["intervalSize"])
         self.timeSteps = params["timeSteps"]
         self.paramsListGA2 = ["crossover", "mutate", "select", "populationGA2", "numGeneration2",
@@ -51,15 +54,17 @@ class Controller:
         return fitness
 
     def run(self, timeStep):
-        print("It's working")
         newPopulation = self.params["populationGA2"]
-        if newPopulation is not None:
+        if newPopulation is None:
+            population = None
+        elif any(isinstance(i, list) for i in newPopulation):
             population = []
             for individual in newPopulation:
-                population.append(
-                    individual[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
+                population.append(individual[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
         else:
-            population = None
+            population = []
+            population.append(newPopulation[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
+
         self.paramsGA2["population"] = population
         ga2 = GA2(self.paramsGA2)
         fitness, improvement, bestIndividual = ga2.run()
@@ -77,29 +82,29 @@ class Controller:
 # "populationGA2": obtained from optimzation1}
 
 
-# params = {"numGeneration2": 10,
-#           "timeSteps": 10,
-#           "intervalSize": 120,
-#           "numIndividuals2": 50,
-#           "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
-
-# optimization2(params)
-# params = {"numGeneration2": 10,
-#           "timeSteps": 10,
-#           "intervalSize": 120,
-#           "numIndividuals2": 50,
-#           "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
-# NUM_INDIVIDUALS = params["numIndividuals2"]
-# preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
-#                     "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
-#                     "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
-#                     "crossroads": 21,
-#                     "densities": None,
-#                     "simulator": Simulator(10, 2, 3),
-#                     "fitnessGA2": "1",
-#                     "minLim": 0,
-#                     "maxLim": 119}
-
-# controller = Controller({**params, **preDefinedParams})
-# for i in range(params["timeSteps"]):
-#     controller.run(i)
+##params = {"numGeneration2": 10,
+##           "timeSteps": 10,
+##           "intervalSize": 120,
+##           "numIndividuals2": 50,
+##           "populationGA2": None,
+##           "saveLocation": "PopulationGA2.pickle"}
+##
+##NUM_INDIVIDUALS = params["numIndividuals2"]
+##preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
+##                    "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
+##                    "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
+##                    "crossroads": 21,
+##                    "densities": None,
+##                    "simulator": Simulator(10, 2, 3),
+##                    "fitnessGA2": "1",
+##                    "minLim": 0,
+##                    "maxLim": 119}
+##
+##controller = Controller({**params, **preDefinedParams})
+##for i in range(params["timeSteps"]):
+##    a, b, c = controller.run(i)
+##    temp = {}
+##    for j in range(50):
+##        k = random.choice(list(c.keys()))
+##        temp[k] = c[k]
+##    print(temp)

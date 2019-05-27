@@ -9,7 +9,7 @@ from deap import creator
 from deap import tools
 import math
 import copy
-from .simulator import Simulator
+from simulator import Simulator
 
 
 class GA1:
