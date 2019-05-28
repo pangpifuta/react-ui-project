@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^api/checkoptimization/', views.checkoptimize),
     url(r'^api/initialization/$', views.initialize),
     url(r'^api/checkinitialization/', views.checkinitialize),
+    url(r'^api/requestfile/', views.requestfile),
     url(r'^api/stat/', views.stat)
 ]

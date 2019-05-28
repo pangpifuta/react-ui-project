@@ -1,6 +1,5 @@
 import array
 import random
-from long import GA1
 import numpy
 import math
 from deap import algorithms

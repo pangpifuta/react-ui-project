@@ -1,6 +1,6 @@
-from long import GA1
-from short1 import GA2
-from simulator import Simulator
+from .long import GA1
+from .short1 import GA2
+from .simulator import Simulator
 import time
 from deap import tools
 import math
@@ -60,10 +60,12 @@ class Controller:
         elif any(isinstance(i, list) for i in newPopulation):
             population = []
             for individual in newPopulation:
-                population.append(individual[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
+                population.append(
+                    individual[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
         else:
             population = []
-            population.append(newPopulation[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
+            population.append(
+                newPopulation[timeStep*self.params["crossroads"]:(timeStep+1)*self.params["crossroads"]])
 
         self.paramsGA2["population"] = population
         ga2 = GA2(self.paramsGA2)
@@ -82,29 +84,29 @@ class Controller:
 # "populationGA2": obtained from optimzation1}
 
 
-##params = {"numGeneration2": 10,
-##           "timeSteps": 10,
-##           "intervalSize": 120,
-##           "numIndividuals2": 50,
-##           "populationGA2": None,
-##           "saveLocation": "PopulationGA2.pickle"}
+# params = {"numGeneration2": 10,
+# "timeSteps": 10,
+# "intervalSize": 120,
+# "numIndividuals2": 50,
+# "populationGA2": None,
+# "saveLocation": "PopulationGA2.pickle"}
 ##
 ##NUM_INDIVIDUALS = params["numIndividuals2"]
-##preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
-##                    "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
-##                    "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
-##                    "crossroads": 21,
-##                    "densities": None,
-##                    "simulator": Simulator(10, 2, 3),
-##                    "fitnessGA2": "1",
-##                    "minLim": 0,
-##                    "maxLim": 119}
+# preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
+# "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
+# "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
+# "crossroads": 21,
+# "densities": None,
+# "simulator": Simulator(10, 2, 3),
+# "fitnessGA2": "1",
+# "minLim": 0,
+# "maxLim": 119}
 ##
 ##controller = Controller({**params, **preDefinedParams})
-##for i in range(params["timeSteps"]):
+# for i in range(params["timeSteps"]):
 ##    a, b, c = controller.run(i)
 ##    temp = {}
-##    for j in range(50):
+# for j in range(50):
 ##        k = random.choice(list(c.keys()))
 ##        temp[k] = c[k]
-##    print(temp)
+# print(temp)

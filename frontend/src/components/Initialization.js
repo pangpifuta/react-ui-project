@@ -3,6 +3,7 @@ import { Select, Text,Grommet, Box, FormField, Button } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { grommet } from "grommet/themes";
 import LoadingScreen from 'react-loading-screen';
+import saveAs from 'file-saver';
 
 class Initialization extends Component {
     constructor(props) {
@@ -57,6 +58,16 @@ class Initialization extends Component {
         return new Promise(resolve => setTimeout(resolve, milliseconds))
       }
 
+      download(path) {
+        setTimeout(() => {
+          const response = {
+            file: path,
+          };
+          window.location.href = response.file;
+          // window.open(response.file)
+        }, 100);
+      }
+
       async fetchData(){
         this.state.timeDur = (parseInt(this.state.hr,10) *60 + parseInt(this.state.min,10))*60 //seconds
         this.state.loading = true
@@ -69,13 +80,15 @@ class Initialization extends Component {
         while(!flag){
           await this.sleep(30000)
           res = await fetch(checkpath)
-          if (res.status == 200) {
+          if (res.status === 200) {
             flag = true
           }
         }
         var resjson = await res.json()
         console.log("Receive Response", resjson)
         this.state.loading = false
+        var reqfile = 'http://localhost:8000/api/requestfile'
+        this.download(reqfile)
         this.onResult(resjson)
       }
 

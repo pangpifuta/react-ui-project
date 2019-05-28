@@ -67,7 +67,7 @@ class RealTimeOptimization extends Component {
         while(!flag){
           await this.sleep(30000)
           res = await fetch(checkpath)
-          if (res.status == 200) {
+          if (res.status === 200) {
             flag = true
           }
         }

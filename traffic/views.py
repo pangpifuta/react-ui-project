@@ -68,10 +68,11 @@ def initialize(request):
     duration = int(request.GET['duration'])
     generation = int(request.GET['generation'])
     individuals = int(request.GET['individuals'])
+    timeSteps = int(request.GET['timestep'])
     print(region, duration, generation, individuals)
     params = {"region": region,
               "numGeneration1": generation,
-              "timeSteps": 2,
+              "timeSteps": timeSteps,
               "intervalSize": duration,
               "numIndividuals1": individuals}
     print("Initializing")
@@ -83,7 +84,11 @@ def processInitialize(params):
     global FinishedInitialize, StorageInitialize
     res = optimization1(params)
     FinishedInitialize = True
-    StorageInitialize = res
+    temp = ()
+    temp0 = []
+    temp0.append(res[0])
+    temp += (temp0, res[1],)
+    StorageInitialize = temp
 
 
 def checkinitialize(request):
@@ -91,9 +96,20 @@ def checkinitialize(request):
     if not FinishedInitialize:
         return http.HttpResponse(status=204)
     else:
-        print("Returning ", len(StorageInitialize))
+        print("Returning ", len(StorageInitialize), StorageInitialize[0])
         FinishedInitialize = False
         return http.HttpResponse(json.dumps(StorageInitialize), content_type="application/json")
+
+
+def requestfile(request):
+    path = 'temp.pickle'
+    if os.stat(path).st_size == 0:
+        return http.HttpResponse("File not exists")
+    with open(path, 'rb') as f:
+        response = http.HttpResponse(
+            f, content_type="application/python-pickle")
+        response['Content-Disposition'] = 'attachment; filename="result.pickle"'
+        return response
 
 
 def stat(request):
@@ -118,12 +134,10 @@ def optimization2(params):
     print("Run Opt2 for", params["timeSteps"])
     temp = ()
     temp0 = []
-    temp1 = []
     for i in range(params["timeSteps"]):
         # print("views.py print")
         res = controller.run(i)
         print("iteration", i+1, "of", params["timeSteps"], "Result", len(res))
         temp0.append(res[0])
-        temp1.append(res[1])
-    temp += (temp0, temp1, res[2],)
+    temp += (temp0, res[2],)
     return temp
