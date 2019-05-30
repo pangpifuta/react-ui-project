@@ -136,7 +136,7 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
               )
               )}
               {["Initialization"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<BarChart/>} label="Initialization" href="/initialization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<BarChart/>} label="Optimization1" href="/initialization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
                    <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
                     <Text>{name}</Text>
                    </Box> 
@@ -144,7 +144,7 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
               )
               )}
               {["Real Time Optimization"].map(name => (
-                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<ClockIcon/>} label="Real Time Optimization" href="/real-time-optimization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
+                <SidebarButton style={{width:'100%', height:'7%', position: 'relative'}} key={name} icon={<ClockIcon/>} label="Optimization2" href="/real-time-optimization" hoverIndicator>  {/* ICON PROBLEM !!!!!!! */}
                    <Box fill direction="row" gap="xlarge" pad={{ horizontal: "medium", vertical: "xlarge" }}> 
                     <Text>{name}</Text>
                    </Box> 

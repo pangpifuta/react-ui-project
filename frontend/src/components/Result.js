@@ -98,7 +98,21 @@ class Result extends Component {
                   <CanvasJSChart options = {options}></CanvasJSChart>
                   </div>
                   </Box>
-              </Box> 
+              </Box>
+
+              <Box direction="row" wrap="true" pad="large" background="light-4">
+                    <Box basis="1/3" align="center">
+	                  <RangeInput
+	                  value={value}
+	                  min={0}
+	                  max={10}
+	                  step={1}
+	                  value={timestep} 
+	                  onChange={event => this.setState({ timestep: event.target.value })}
+	                />
+	                  <Text>Time Step: {timestep}</Text>
+                    </Box>
+              </Box>  
 
               {/*<Box direction="row" pad="large"  background="light-4">
                <Text>Time Step</Text> 
