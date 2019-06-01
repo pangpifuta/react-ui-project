@@ -30,6 +30,12 @@ def optimize(request):
     generation = int(request.GET['generation'])
     individuals = int(request.GET['individuals'])
     timeSteps = int(request.GET['timestep'])
+    popga2 = None
+    # if upload file {
+    #     popga2 = read file
+    # }
+    # popga2 = [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [
+    #     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]
     print(region, duration, generation, individuals)
     # popga2 = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
     #            11, 12, 13, 14, 15, 16, 17, 18, 19, 20]]
@@ -38,7 +44,7 @@ def optimize(request):
               "intervalSize": duration,
               "timeSteps": timeSteps,
               "numIndividuals2": individuals,
-              "populationGA2": [[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10], [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]]}
+              "populationGA2": popga2}
     print("Optimizing")
     threading.Thread(target=process, args=(params, )).start()
     print("Started threading!")
@@ -133,11 +139,13 @@ def optimization2(params):
     controller = Controller({**params, **preDefinedParams})
     print("Run Opt2 for", params["timeSteps"])
     temp = ()
-    temp0 = []
+    improvement = []
+    coords = []
     for i in range(params["timeSteps"]):
         # print("views.py print")
         res = controller.run(i)
         print("iteration", i+1, "of", params["timeSteps"], "Result", len(res))
-        temp0.append(res[0])
-    temp += (temp0, res[2],)
+        improvement.append(res[0])
+        coords.append(res[2])
+    temp += (improvement, coords,)
     return temp

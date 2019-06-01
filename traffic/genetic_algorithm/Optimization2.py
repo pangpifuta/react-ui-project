@@ -8,14 +8,13 @@ import copy
 import os.path
 import pickle
 import numpy as np
+import random
 
 
 class Controller:
     def __init__(self, params):
         self.params = params
-        if self.params["saveLocation"] is not None:
-            file = open(self.params["saveLocation"], "rb")
-            self.params["populationGA2"] = pickle.load(file)
+
         self.params["simulator"].setTimeInterval(self.params["intervalSize"])
         self.timeSteps = params["timeSteps"]
         self.paramsListGA2 = ["crossover", "mutate", "select", "populationGA2", "numGeneration2",
@@ -83,30 +82,29 @@ class Controller:
 # "numIndividuals2": 50,
 # "populationGA2": obtained from optimzation1}
 
-
-# params = {"numGeneration2": 10,
-# "timeSteps": 10,
-# "intervalSize": 120,
-# "numIndividuals2": 50,
-# "populationGA2": None,
-# "saveLocation": "PopulationGA2.pickle"}
-##
-##NUM_INDIVIDUALS = params["numIndividuals2"]
+# file = open("PopulationGA2.pickle", "rb")
+# populationGA2 = pickle.load(file)
+# params = {"numGeneration2": 1,
+#           "timeSteps": 2,
+#           "intervalSize": 120,
+#           "numIndividuals2": 50,
+#           "populationGA2": populationGA2}
+# NUM_INDIVIDUALS = params["numIndividuals2"]
 # preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
-# "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
-# "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
-# "crossroads": 21,
-# "densities": None,
-# "simulator": Simulator(10, 2, 3),
-# "fitnessGA2": "1",
-# "minLim": 0,
-# "maxLim": 119}
-##
-##controller = Controller({**params, **preDefinedParams})
+#                     "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
+#                     "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
+#                     "crossroads": 21,
+#                     "densities": None,
+#                     "simulator": Simulator(10, 2, 3),
+#                     "fitnessGA2": "1",
+#                     "minLim": 0,
+#                     "maxLim": 119}
+
+# controller = Controller({**params, **preDefinedParams})
 # for i in range(params["timeSteps"]):
-##    a, b, c = controller.run(i)
-##    temp = {}
-# for j in range(50):
-##        k = random.choice(list(c.keys()))
-##        temp[k] = c[k]
-# print(temp)
+#     a, b, c = controller.run(i)
+#     temp = {}
+#     for j in range(50):
+#         k = random.choice(list(c.keys()))
+#         temp[k] = c[k]
+#     print(temp)
