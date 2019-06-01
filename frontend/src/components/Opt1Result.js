@@ -207,7 +207,7 @@ class Opt1Result extends Component {
             suffix: ""
           },
           axisX: {
-            title: "Time step",
+            title: "Generation",
             prefix: "",
             interval: 1
           },
