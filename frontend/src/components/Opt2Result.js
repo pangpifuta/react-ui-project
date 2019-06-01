@@ -14,6 +14,8 @@ class Opt2Result extends Component {
           coordinates = []
           
           var pointy = this.props.location.state.result[0];
+          var carCoordinates = this.props.location.state.result[1];
+          
           for (var i = 0; i < pointy.length; i++) {
             coordinates.push({x: i+1,y: pointy[i]})
           }
