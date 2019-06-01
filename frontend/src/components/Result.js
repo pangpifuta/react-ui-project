@@ -15,11 +15,13 @@ class Result extends Component {
           
           var pointy = this.props.location.state.result[0];
           for (var i = 0; i < pointy.length; i++) {
-            coordinates.push({x: i,y: pointy[i]})
+            coordinates.push({x: i+1,y: pointy[i]})
           }
         }
         this.state = {
           graphData: coordinates,
+          maxTimestep: this.props.location.state.timestep,
+          timestep : this.props.location.state.timestep,
           loading: false
         };
     }
@@ -55,6 +57,8 @@ class Result extends Component {
         const { value } = this.state;
         const { timestep } = this.state;
         const { graphData} = this.state;
+        const { maxTimestep} = this.state;
+        console.log(maxTimestep, timestep)
         const divStyle = {
           width: '95%',
           height: '100%'
@@ -105,9 +109,9 @@ class Result extends Component {
 	                  <RangeInput
 	                  value={value}
 	                  min={0}
-	                  max={10}
+	                  max={maxTimestep}
 	                  step={1}
-	                  value={timestep} 
+	                  
 	                  onChange={event => this.setState({ timestep: event.target.value })}
 	                />
 	                  <Text>Time Step: {timestep}</Text>

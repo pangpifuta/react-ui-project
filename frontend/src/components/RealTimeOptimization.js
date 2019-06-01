@@ -43,7 +43,8 @@ class RealTimeOptimization extends Component {
         this.props.history.push({
           pathname: path,
           state: {
-            result: params
+            result: params,
+            timestep: this.state.timeStep
           }
         });
       }

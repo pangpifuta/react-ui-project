@@ -23,6 +23,7 @@ class Initialization extends Component {
         };
 
         this.fetchData = this.fetchData.bind(this)
+        this.onResult = this.onResult.bind(this)
       }
     
       routeChange(){
@@ -49,7 +50,8 @@ class Initialization extends Component {
         this.props.history.push({
           pathname: path,
           state: {
-            result: params
+            result: params,
+            timestep: this.state.timeStep
           }
         });
       }
