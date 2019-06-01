@@ -91,9 +91,11 @@ def processInitialize(params):
     res = optimization1(params)
     FinishedInitialize = True
     temp = ()
-    temp0 = []
-    temp0.append(res[0])
-    temp += (temp0, res[1],)
+    improvement = []
+    improvement.append(res[0])
+    coords = []
+    coords.append(res[1])
+    temp += (improvement, coords,)
     StorageInitialize = temp
 
 
