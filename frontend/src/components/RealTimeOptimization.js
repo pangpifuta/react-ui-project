@@ -39,7 +39,7 @@ class RealTimeOptimization extends Component {
 
       onResult = (params) => {
         console.log("Parse param", params)
-        let path = `./result`;
+        let path = `./real-time-optimization-result`;
         this.props.history.push({
           pathname: path,
           state: {

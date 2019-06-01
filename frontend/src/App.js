@@ -31,7 +31,8 @@ import CurrentTraffic from './components/CurrentTraffic'
 // import Stat from './components/Stat'
 import Initialization from './components/Initialization'
 import RealTimeOptimization from './components/RealTimeOptimization'
-import Result from './components/Result'
+import Opt1Result from './components/Opt1Result'
+import Opt2Result from './components/Opt2Result'
 
 // const PlainButton = props => (
 //   <Grommet theme={grommet}>
@@ -168,7 +169,8 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
              {/* <Route path="/stat" component={Stat} /> */}
              <Route path="/initialization" component={Initialization} />
              <Route path="/real-time-optimization" component={RealTimeOptimization} />
-             <Route path="/result" component={Result} />
+             <Route path="/initialization-result" component={Opt1Result} />
+             <Route path="/real-time-optimization-result" component={Opt2Result} />
              
              <Redirect to="/" />
            </Switch>

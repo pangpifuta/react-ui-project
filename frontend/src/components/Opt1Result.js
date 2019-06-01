@@ -5,7 +5,7 @@ import CanvasJSReact from './assets/canvasjs.react';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-class Result extends Component {
+class Opt1Result extends Component {
     constructor(props) {
         super(props)
         // console.log("Result:", this.props.location.state.result)
@@ -149,7 +149,7 @@ class Result extends Component {
      index.parentNode.insertBefore(script, index)
    }
    
-export default Result
+export default Opt1Result
 
       
    

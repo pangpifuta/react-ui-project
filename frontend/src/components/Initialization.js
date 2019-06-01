@@ -46,7 +46,7 @@ class Initialization extends Component {
       }
 
       onResult = (params) => {
-        let path = `./result`;
+        let path = `./initialization-result`;
         this.props.history.push({
           pathname: path,
           state: {
