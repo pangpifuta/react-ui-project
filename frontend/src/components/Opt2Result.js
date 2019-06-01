@@ -223,6 +223,7 @@ class Opt2Result extends Component {
            
             <Grommet theme={grommet}>
             <Box  pad="medium" background="light-4">
+            <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
               <Box direction="row" wrap="true" background="light-4">
                   <Box basis="1/2">
                   <div id="map" style={divStyle} ></div>
