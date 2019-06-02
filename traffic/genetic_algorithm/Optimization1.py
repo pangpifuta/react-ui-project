@@ -46,14 +46,14 @@ class Controller:
     def run2(self):
         self.paramsGA1["simulator"].clear()
         ga1 = GA1(self.paramsGA1)
-        fitness, improvement, individual = ga1.run()
+        fitnesses, results, individual = ga1.run()
         individual = individual[0]
         positions = {}
         for i in range(self.timeSteps):
             positions[i] = self.paramsGA1["simulator"].getPositions(
                 individual[i*self.params["crossroads"]:(i+1)*self.params["crossroads"]])
         self.params["simulator"].exit()
-        return positions, individual, improvement
+        return positions, fitnesses, results, individual
 
     def run1(self):
         timeStep = 0
@@ -97,25 +97,24 @@ def optimization1(params):
                         "minLim": 0,
                         "maxLim": 119}
     controller = Controller({**params, **preDefinedParams})
-    positions, individual, improvement = controller.run2()
+    positions, fitnesses, results, individual = controller.run2()
+
     temp = []
     for i in individual:
         temp.append(i)
     with open('temp.pickle', 'wb') as f:
         pickle.dump(temp, f)
-    return improvement, positions
+    print("-----------------FITNESS---------------------\n")
+    print(fitnesses)
+    print("-----------------RESULTS---------------------\n")
+    print(results)
+    return fitnesses, results, positions
 
 
 # params = {"numGeneration1": 2,
-#           "timeSteps": 2,
-#           "intervalSize": 120,
-#           "numIndividuals1": 4,
-#           "saveLocation": "PopulationGA2.pickle", }
-
-# a, b, c = optimization1(params)
-# temp = []
-# for i in b:
-#     temp.append(i)
-# print(temp)
-# with open("PopulationGA2.pickle", 'wb') as f:
-#     pickle.dump(temp, f)
+# "timeSteps": 2,
+# "intervalSize": 120,
+# "numIndividuals1": 4,
+# "saveLocation": "PopulationGA2.pickle",}
+##
+# optimization1(params)

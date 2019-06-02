@@ -63,8 +63,7 @@ def checkoptimize(request):
     if not FinishedOptimize:
         return http.HttpResponse(status=204)
     else:
-        print("Returning ", len(StorageOptimize),
-              StorageOptimize[0], StorageOptimize[1])
+        print("Returning ", len(StorageOptimize), StorageOptimize[0])
         FinishedOptimize = False
         return http.HttpResponse(json.dumps(StorageOptimize), content_type="application/json")
 
@@ -91,11 +90,11 @@ def processInitialize(params):
     res = optimization1(params)
     FinishedInitialize = True
     temp = ()
-    improvement = []
-    improvement.append(res[0])
+    improvement = res[0]
+    result = res[1]
     coords = []
-    coords.append(res[1])
-    temp += (improvement, coords,)
+    coords.append(res[2])
+    temp += (improvement, coords, result,)
     StorageInitialize = temp
 
 
@@ -143,11 +142,17 @@ def optimization2(params):
     temp = ()
     improvement = []
     coords = []
+    result = []
     for i in range(params["timeSteps"]):
         # print("views.py print")
         res = controller.run(i)
         print("iteration", i+1, "of", params["timeSteps"], "Result", len(res))
-        improvement.append(res[0])
+        min = 99999999
+        for j in range(len(res[0])):
+            if res[0][j] < min:
+                min = res[0][j]
+        improvement.append(min)
         coords.append(res[2])
-    temp += (improvement, coords,)
+        result.append(res[1])
+    temp += (improvement, coords, result,)
     return temp

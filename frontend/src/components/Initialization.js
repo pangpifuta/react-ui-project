@@ -51,7 +51,7 @@ class Initialization extends Component {
           pathname: path,
           state: {
             result: params,
-            timestep: this.state.timeStep
+            timestep: this.state.generation
           }
         });
       }

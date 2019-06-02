@@ -64,6 +64,24 @@ class GA2:
             fitnesses = self.simulator.getFitness3(signals, self.densities)
         return fitnesses
 
+    def printStats(self, worst, pop, generation):
+        length = len(pop)
+        fits = [ind.fitness.values[0] for ind in pop]
+        mean = sum(fits) / length
+        sum2 = sum(x*x for x in fits)
+        std = abs(sum2 / length - mean**2)**0.5
+        improvement = ((worst-min(fits))*100)/worst
+        bestFitness = min(fits)
+        toPrint = "-"*30
+        toPrint += ("\nGeneration %s statistics" % str(generation+1))
+        toPrint += ("\n          Min: %s" % min(fits))
+        toPrint += ("\n          Max: %s" % max(fits))
+        toPrint += ("\n          Avg: %s" % mean)
+        toPrint += ("\n          Std: %s" % std)
+        toPrint += ("\n  Improvement: %s \n" % improvement)
+        toPrint += ("-"*30)
+        return toPrint
+
     def run(self):
         pop = self.toolbox.population(n=self.numIndividuals)
         if self.population is not None:
@@ -76,6 +94,9 @@ class GA2:
         for ind, fit in zip(pop, fitnesses):
             ##            print(ind, fit)
             ind.fitness.values = fit
+
+        results = ""
+        bestFitnesses = []
 
         worst = min([ind.fitness.values[0] for ind in pop])
         bestFitness = 0
@@ -90,21 +111,15 @@ class GA2:
             std = abs(sum2 / length - mean**2)**0.5
             improvement = ((worst-min(fits))*100)/worst
             bestFitness = min(fits)
+            bestFitnesses.append(bestFitness)
+            results += self.printStats(worst, pop, generation)
             worstFitness = max(fits)
 
-            print("-"*30)
-            print("Generation %s statistics" % str(generation+1))
-            print("          Min: %s" % min(fits))
-            print("          Max: %s" % max(fits))
-            print("          Avg: %s" % mean)
-            print("          Std: %s" % std)
-            print("  Improvement: %s" % improvement)
-            print("-"*30)
             params_select = copy.deepcopy(self.select)
             params_select["individuals"] = pop
             bestIndividuals = self.toolbox.select(**params_select)
-            print("Selected individuals:")
-            print(bestIndividuals)
+##            print("Selected individuals:")
+# print(bestIndividuals)
             bestIndividual = bestIndividuals[0]
             del params_select
             if (generation == self.numGeneration-1):
@@ -132,11 +147,11 @@ class GA2:
                         break
                 if (index >= len(offspring)-2):
                     break
-            for mutant in offspring:
-                params_mutate = copy.deepcopy(self.mutate)
-                params_mutate["individual"] = mutant
-                self.toolbox.mutate(**params_mutate)
-                del params_mutate
+# for mutant in offspring:
+##                params_mutate = copy.deepcopy(self.mutate)
+##                params_mutate["individual"] = mutant
+# self.toolbox.mutate(**params_mutate)
+##                del params_mutate
 
 ##            print("Generation " + str(generation+2))
             fitnesses = self.fitnessFunction(offspring)
@@ -146,4 +161,5 @@ class GA2:
 
             pop[:] = offspring
             fits = [ind.fitness.values[0] for ind in pop]
-        return bestFitness, (worstFitness - bestFitness)*100/worstFitness, bestIndividual
+        print(bestFitnesses, results)
+        return bestFitnesses, results, bestIndividual

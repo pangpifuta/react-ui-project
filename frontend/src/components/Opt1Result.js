@@ -188,7 +188,7 @@ class Opt1Result extends Component {
         const { timestep } = this.state;
         const { graphData} = this.state;
         const { maxTimestep} = this.state;
-        console.log(maxTimestep, timestep)
+        // console.log(maxTimestep, timestep)
         const divStyle = {
           width: '95%',
           height: '100%'
@@ -213,7 +213,7 @@ class Opt1Result extends Component {
           },
           data: [{
             type: "line",
-            toolTipContent: "Step {x}:Improvement {y}%",
+            toolTipContent: "Generation {x}:Improvement {y}%",
             dataPoints: graphData
           }]
         } 

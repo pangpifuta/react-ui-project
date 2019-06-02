@@ -136,15 +136,15 @@ class GA1:
         std = abs(sum2 / length - mean**2)**0.5
         improvement = ((worst-min(fits))*100)/worst
         bestFitness = min(fits)
-
-        print("-"*30)
-        print("Generation %s statistics" % str(generation+1))
-        print("          Min: %s" % min(fits))
-        print("          Max: %s" % max(fits))
-        print("          Avg: %s" % mean)
-        print("          Std: %s" % std)
-        print("  Improvement: %s" % improvement)
-        print("-"*30)
+        toPrint = "-"*30
+        toPrint += ("\nGeneration %s statistics" % str(generation+1))
+        toPrint += ("\n          Min: %s" % min(fits))
+        toPrint += ("\n          Max: %s" % max(fits))
+        toPrint += ("\n          Avg: %s" % mean)
+        toPrint += ("\n          Std: %s" % std)
+        toPrint += ("\n  Improvement: %s \n" % improvement)
+        toPrint += ("-"*30)
+        return toPrint
 
     def removeDuplicates(self, pop):
         toRemove = []
@@ -167,24 +167,25 @@ class GA1:
         else:
             pop = self.population
 
-        print("Generation 1")
         fitnesses = self.fitnessFunction(pop)
+
+        results = ""
+        bestFitnesses = []
 
         worst = min([ind.fitness.values[0] for ind in pop])
         bestFitness = 0
         bestIndividuals = None
 
         for generation in range(self.numGeneration):
-            self.printStats(worst, pop, generation)
+            results += self.printStats(worst, pop, generation)
 ##            pop = self.removeDuplicates(pop)
             bestIndividuals = self.selectIndividuals(pop)
+            bestFitnesses.append(bestIndividuals[0].fitness.values[0])
             if (generation == self.numGeneration-1):
                 break
             offspring = self.makePopulation(bestIndividuals)
-            print("Generation " + str(generation+2))
             fitnesses = self.fitnessFunction(offspring)
             pop[:] = offspring
             fits = [ind.fitness.values[0] for ind in pop]
-
         self.population = pop
-        return bestFitness, (worst - bestFitness)*100/worst, bestIndividuals
+        return bestFitnesses, results, bestIndividuals

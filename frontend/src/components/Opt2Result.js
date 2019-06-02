@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RangeInput, Text,Grommet, Box } from 'grommet';
+import { RangeInput, Text,Grommet, Box, InfiniteScroll } from 'grommet';
 import { grommet } from "grommet/themes";
 import CanvasJSReact from './assets/canvasjs.react';
 
@@ -15,6 +15,7 @@ class Opt2Result extends Component {
           
           var pointy = this.props.location.state.result[0];
           var carCoordinates = this.props.location.state.result[1];
+          var textresult = this.props.location.state.result[2];
           
           for (var i = 0; i < pointy.length; i++) {
             coordinates.push({x: i+1,y: pointy[i]})
@@ -24,6 +25,8 @@ class Opt2Result extends Component {
           graphData: coordinates,
           maxTimestep: this.props.location.state.timestep,
           timestep : this.props.location.state.timestep,
+          textresult: textresult,
+          carCoordinates: carCoordinates,
           loading: false
         };
     }
@@ -188,7 +191,8 @@ class Opt2Result extends Component {
         const { timestep } = this.state;
         const { graphData} = this.state;
         const { maxTimestep} = this.state;
-        console.log(maxTimestep, timestep)
+        const {textresult} = this.state;
+        // console.log(maxTimestep, timestep)
         const divStyle = {
           width: '95%',
           height: '100%'
@@ -246,6 +250,22 @@ class Opt2Result extends Component {
 	                  onChange={event => this.setState({ timestep: event.target.value })}
 	                />
 	                  <Text>Time Step: {timestep}</Text>
+                    </Box>
+                    <Box align="center" pad="medium" background="light-4">
+                      {/* <Box pad="medium" background="#ffffff">
+                      <Text>Hello Thanadin</Text>
+                      </Box> */}
+
+                      <InfiniteScroll items={textresult}>
+                          {(item) => (
+                            <Box
+                              pad='medium'
+                              align='center'
+                            >
+                              <Text>{item}</Text>
+                            </Box>
+                          )}
+                        </InfiniteScroll>
                     </Box>
               </Box>  
 
