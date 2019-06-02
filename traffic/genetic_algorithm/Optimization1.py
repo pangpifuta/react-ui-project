@@ -104,17 +104,14 @@ def optimization1(params):
         temp.append(i)
     with open('temp.pickle', 'wb') as f:
         pickle.dump(temp, f)
-    print("-----------------FITNESS---------------------\n")
-    print(fitnesses)
-    print("-----------------RESULTS---------------------\n")
-    print(results)
     return fitnesses, results, positions
 
 
 # params = {"numGeneration1": 2,
-# "timeSteps": 2,
-# "intervalSize": 120,
-# "numIndividuals1": 4,
-# "saveLocation": "PopulationGA2.pickle",}
-##
-# optimization1(params)
+#           "timeSteps": 2,
+#           "intervalSize": 120,
+#           "numIndividuals1": 4,
+#           "saveLocation": "PopulationGA2.pickle",}
+
+# a, b, c = optimization1(params)
+# print(c)
