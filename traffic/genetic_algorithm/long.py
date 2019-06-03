@@ -137,12 +137,12 @@ class GA1:
         improvement = ((worst-min(fits))*100)/worst
         bestFitness = min(fits)
         toPrint = "-"*30
-        toPrint += ("\n\nGeneration %s statistics" % str(generation+1))
-        toPrint += ("\n\n          Min: %s" % min(fits))
-        toPrint += ("\n\n          Max: %s" % max(fits))
-        toPrint += ("\n\n          Avg: %s" % mean)
-        toPrint += ("\n\n          Std: %s" % std)
-        toPrint += ("\n\n  Improvement: %s \n\n" % improvement)
+        toPrint += ("\nGeneration %s statistics" % str(generation+1))
+        toPrint += ("\n          Min: %s" % min(fits))
+        toPrint += ("\n          Max: %s" % max(fits))
+        toPrint += ("\n          Avg: %s" % mean)
+        toPrint += ("\n          Std: %s" % std)
+        toPrint += ("\n  Improvement: %s \n" % improvement)
         toPrint += ("-"*30)
         return toPrint
 
