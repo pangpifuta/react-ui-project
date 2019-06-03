@@ -136,9 +136,7 @@ class GA1:
         std = abs(sum2 / length - mean**2)**0.5
         improvement = ((worst-min(fits))*100)/worst
         bestFitness = min(fits)
-        i = 1
-        toPrint = ("Time Step: "+i)
-        toPrint += "-"*30
+        toPrint = "-"*30
         toPrint += ("\n\nGeneration %s statistics" % str(generation+1))
         toPrint += ("\n\n          Min: %s" % min(fits))
         toPrint += ("\n\n          Max: %s" % max(fits))
@@ -146,7 +144,6 @@ class GA1:
         toPrint += ("\n\n          Std: %s" % std)
         toPrint += ("\n\n  Improvement: %s \n\n" % improvement)
         toPrint += ("-"*30)
-        i += 1
         return toPrint
 
     def removeDuplicates(self, pop):
