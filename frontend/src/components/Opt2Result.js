@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RangeInput, Text,Grommet, Box, InfiniteScroll } from 'grommet';
+import { RangeInput, Text,Grommet, Box } from 'grommet';
 import { grommet } from "grommet/themes";
 import CanvasJSReact from './assets/canvasjs.react';
 
@@ -22,7 +22,7 @@ class Opt2Result extends Component {
             coordinates.push({x: i+1,y: pointy[i]})
           }
         }
-        textresult = "------------------------------\nGeneration 1 statistics\nMin: 92616.0\nMax: 121013.0\nAvg: 104677.04\nStd: 5780.238475910989\nImprovement: 0.0\n------------------------------\n------------------------------\nGeneration 2 statistics\nMin: 89508.0\nMax: 107961.0\nAvg: 95501.04\nStd: 3708.074950483309\nImprovement: 3.355791655869396\n------------------------------\n------------------------------\nGeneration 3 statistics\nMin: 88514.0\nMax: 107961.0\nAvg: 93186.04\nStd: 4311.751472244193\nImprovement: 4.429040338602401\n------------------------------\n------------------------------\nGeneration 4 statistics\nMin: 86235.0\nMax: 107961.0\nAvg: 91330.12\nStd: 4816.768471247184\nImprovement: 6.889738274164292\n------------------------------\n------------------------------\nGeneration 5 statistics\nMin: 83252.0\nMax: 107961.0\nAvg: 89872.04\nStd: 5419.523901451246\nImprovement: 10.11056404940831\n------------------------------\n"
+        // textresult = "------------------------------\nGeneration 1 statistics\nMin: 92616.0\nMax: 121013.0\nAvg: 104677.04\nStd: 5780.238475910989\nImprovement: 0.0\n------------------------------\n------------------------------\nGeneration 2 statistics\nMin: 89508.0\nMax: 107961.0\nAvg: 95501.04\nStd: 3708.074950483309\nImprovement: 3.355791655869396\n------------------------------\n------------------------------\nGeneration 3 statistics\nMin: 88514.0\nMax: 107961.0\nAvg: 93186.04\nStd: 4311.751472244193\nImprovement: 4.429040338602401\n------------------------------\n------------------------------\nGeneration 4 statistics\nMin: 86235.0\nMax: 107961.0\nAvg: 91330.12\nStd: 4816.768471247184\nImprovement: 6.889738274164292\n------------------------------\n------------------------------\nGeneration 5 statistics\nMin: 83252.0\nMax: 107961.0\nAvg: 89872.04\nStd: 5419.523901451246\nImprovement: 10.11056404940831\n------------------------------\n"
         this.state = {
           graphData: coordinates,
           maxTimestep: this.props.location.state.timestep,
@@ -228,7 +228,10 @@ class Opt2Result extends Component {
         return (
             <Grommet theme={grommet}>
               <Box  pad="medium" background="light-4"> 
-                <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
+
+                  <Box pad="small">
+                  <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
+                  </Box>
 
                   <Box direction="row" wrap="true" background="light-4">
                     <Box basis="1/2">
@@ -254,30 +257,13 @@ class Opt2Result extends Component {
 	                    <Text>Time Step: {timestep}</Text>
                     </Box>
 
-                    <Box basis="2/3" align="end" pad="medium" background="#ffffff">
-                      <Box
-                        flex={false}
-                        pad='medium'
-                        align='center'
-                        overflow='scroll'
-                      >
+                    <Box flex={true} basis="2/3" height="small" align='center' background='light-4' overflow='auto'>
+                        <Box flex={false} wrap="false" background='white' border='all' style={{ width: '888px' }}>
                         <Text>{textresult}</Text>
-                      </Box>
+                        </Box>
                     </Box>
                   </Box>  
 
-              {/*<Box direction="row" pad="large"  background="light-4">
-               <Text>Time Step</Text> 
-                    <RangeInput
-                    value={value}
-                    min={0}
-                    max={10}
-                    step={1}
-                    value={timestep} 
-                    onChange={event => this.setState({ timestep: event.target.value })}
-                  />
-                    <Text>Time Step: {timestep}</Text> 
-              </Box> */}
             </Box>
               
           </Grommet>
