@@ -9,8 +9,6 @@ import LoadingScreen from 'react-loading-screen';
 class RealTimeOptimization extends Component {
     constructor(props) {
         super(props)
-        this.routeChange = this.routeChange.bind(this);
-        this.routeSignUp = this.routeSignUp.bind(this);
 
         this.state = {
           region: '',
@@ -27,15 +25,6 @@ class RealTimeOptimization extends Component {
         this.fetchData = this.fetchData.bind(this)
       }
     
-      routeChange(){
-        let path = `./traffic`;
-        this.props.history.push(path);
-      }
-    
-      routeSignUp(){
-        let path = `./signup`;
-        this.props.history.push(path);
-      }
 
       onResult = (params) => {
         console.log("Parse param", params)
@@ -81,19 +70,7 @@ class RealTimeOptimization extends Component {
       render() {
         const {loading, region, hr, min, generation, noOfInd} = this.state
         return (
-          // <div className="LogIn">
-          //   <div className="header">
-          //       <a>Login</a>
-          //   </div>
-    
-            // <div className="body">
-            
-            // <a>Login</a>
-            
-            //   <form><input placeholder="username" /></form>
-            //   <form><input placeholder="password" /></form>
-            //   <form>< button onClick={this.routeChange}> Log In </ button></form>
-            //   <form>< button onClick={this.routeSignUp}> Sign Up </ button></form>
+
             <LoadingScreen
                 loading={loading}
                 bgColor='#f1f1f1'
@@ -117,11 +94,6 @@ class RealTimeOptimization extends Component {
                     options={["Warsaw"]} 
                   />
                 </FormField>
-
-              {/* <FormField>
-              <Text>Time Step</Text>
-              <SimpleNumberInput min={1} defaultValue={1}/>
-              </FormField> */}
 
               <FormField>
               <Text>Time Step</Text>
@@ -181,8 +153,6 @@ class RealTimeOptimization extends Component {
               <input type="file" name="file" onChange={this.onChangeHandler}/>
               </Box>
               {/* end */}
-
-              {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
 
               <LoadingScreen
                 loading={loading}

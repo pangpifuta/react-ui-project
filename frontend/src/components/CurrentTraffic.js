@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './CurrentTraffic.css'
-import LoadingScreen from 'react-loading-screen';
-import {  Box} from 'grommet';
-
 
 export class CurrentTraffic extends Component {
     constructor(props){
@@ -21,7 +18,6 @@ export class CurrentTraffic extends Component {
     renderMap = () => {
         loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCpfEuV9haslB7YcbL6LwwXAK8ELYHiUck&callback=initMap")
         window.initMap = this.initMap
-        // this.setState({loading: false})
       }
 
 

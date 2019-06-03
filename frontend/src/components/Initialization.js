@@ -8,8 +8,6 @@ import saveAs from 'file-saver';
 class Initialization extends Component {
     constructor(props) {
         super(props)
-        this.routeChange = this.routeChange.bind(this);
-        this.routeSignUp = this.routeSignUp.bind(this);
 
         this.state = {
           region: '',
@@ -26,15 +24,6 @@ class Initialization extends Component {
         this.onResult = this.onResult.bind(this)
       }
     
-      routeChange(){
-        let path = `./traffic`;
-        this.props.history.push(path);
-      }
-    
-      routeSignUp(){
-        let path = `./signup`;
-        this.props.history.push(path);
-      }
 
       onChangenumOfInd = (e) => {
         this.setState({ numOfInd: e.target.value });
@@ -102,19 +91,7 @@ class Initialization extends Component {
         const {loading, region, hr, min, generation, noOfInd} = this.state
 
         return (
-          // <div className="LogIn">
-          //   <div className="header">
-          //       <a>Login</a>
-          //   </div>
-    
-            // <div className="body">
-            
-            // <a>Login</a>
-            
-            //   <form><input placeholder="username" /></form>
-            //   <form><input placeholder="password" /></form>
-            //   <form>< button onClick={this.routeChange}> Log In </ button></form>
-            //   <form>< button onClick={this.routeSignUp}> Sign Up </ button></form>
+
             <LoadingScreen
                 loading={loading}
                 bgColor='#f1f1f1'
@@ -190,25 +167,11 @@ class Initialization extends Component {
                           });
                          }}
                   />
-              {/* <TextInput keyboardType={Number}/> */}
 
-              
-              {/* <FormField label="Number of Individuals">
-              <TextInput
-                ref='numOfIndInput'
-                // autoFocus
-                placeholder=" "
-                type={Number}
-                value={this.state.numOfInd}
-                onChange={this.onChangenumOfInd} />
-              </FormField> */}
-              
 
               </FormField>    
               </Box>
 
-
-              {/* <RangeInput min={0} max={10} step={5} onChange={event => this.setState({ value: event.target.value })} */}
               <Box align="left" pad="medium">
               <Button label="start optimization" color="#0c96bc" onClick={this.fetchData}/>
               </Box>

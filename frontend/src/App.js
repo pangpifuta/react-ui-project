@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
-// import {PageHeader} from 'react-bootstrap';
-// import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
-
 import {Grommet} from 'grommet';
 import {Heading} from 'grommet';
 import {Clock as DClock} from 'grommet';
-// import {Clock as cClock} from 'react-live-clock';
-import { /*LineChart, Optimize,*/ BarChart,  Car, Clock as ClockIcon} from 'grommet-icons';
-
-// import { Add } from "grommet-icons";
+import { BarChart,  Car, Clock as ClockIcon} from 'grommet-icons';
 
 
 import { Box,  Button, Grid, Text } from "grommet";
@@ -18,35 +11,18 @@ import { grommet } from "grommet/themes";
 
 import { 
   Route,
-  // Link,
   Switch,
   Redirect
 } from 'react-router-dom';
 
-// import Login from './components/Login';
-// import Signup from './components/Signup';
-// import About from './components/About';
-// import TCmain from './components/TrafficController';
+
 import CurrentTraffic from './components/CurrentTraffic'
-// import Stat from './components/Stat'
 import Initialization from './components/Initialization'
 import RealTimeOptimization from './components/RealTimeOptimization'
 import Opt1Result from './components/Opt1Result'
 import Opt2Result from './components/Opt2Result'
 
-// const PlainButton = props => (
-//   <Grommet theme={grommet}>
-//     <Box  align="center" pad="small" background="#516f77">
-//       <Button hoverIndicator="#606668" onClick={() => {}} {...props}>
-//         <Box pad="small" direction="row" align="center" gap="small">
 
-//           <Add />
-//           <Text>Add</Text>
-//         </Box>
-//       </Button>
-//     </Box>
-// </Grommet>
-// );
 const SidebarButton = ({ label, icon, href }) => (
   <Button plain href={href}>
     {({ hover }) => (
@@ -110,12 +86,10 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
             <Button onClick={() => this.setState({ sidebar: !sidebar })}>
               <Heading size="small" >Optimal Traffic Control</Heading>
             </Button>
-            {/* <Text><a href="/login">Log In</a></Text>  */}
+
             <div><DigitalClock time={this.state.time}/>
             <Text>(GMT+2) EU/Warsaw</Text></div>
-            {/* <ReactFitText>
-            <cClock format={'HH:mm:ss'} style={{fontSize: '100.5em'}} ticking={true} timezone={'US/Pacific'} />
-            </ReactFitText> */}
+
           </Box>
 
           {sidebar && (
@@ -159,14 +133,9 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
           <div style={{width:'100%', height: '100%'}}>
            <Switch>
              
-             {/* <Route exact path="/login"  component={Login} /> */}
             
-             <Route exact path="/" render={() => <Redirect to="/currenttraffic" />} />
-             
-             {/* <Route path="/traffic" component={TCmain} /> */}
-             
+             <Route exact path="/" render={() => <Redirect to="/currenttraffic" />} />          
              <Route name="currentTraffic"path="/currenttraffic" component={CurrentTraffic} />
-             {/* <Route path="/stat" component={Stat} /> */}
              <Route path="/initialization" component={Initialization} />
              <Route path="/real-time-optimization" component={RealTimeOptimization} />
              <Route path="/initialization-result" component={Opt1Result} />
@@ -186,50 +155,5 @@ state = { sidebar: true, time: Date.now()+ 7.2e+6};
     );
   }
 }
-
-
-// const Percentages = () => (
-//   <Grommet theme={grommet} full>
-//     <Grid
-//       fill
-//       areas={[
-//         { name: "nav", start: [0, 0], end: [0, 0] },
-//         { name: "main", start: [1, 0], end: [1, 0] }
-//       ]}
-//       columns={["small", "flex"]}
-//       rows={["flex"]}
-//       gap="small"
-//     >
-//       <Box gridArea="nav" background="brand" />
-//       <Box gridArea="main" background="brand" />
-//     </Grid>
-//   </Grommet>
-// );
-
-// const NColumnGrid = () => (
-//   <Grommet theme={grommet} full>
-//     <Grid
-//       columns={{
-//         count: 6,
-//         size: "auto"
-//       }}
-//       gap="small"
-//     >
-//       <Box background="brand">Item 1</Box>
-//       <Box background="brand">Item 2</Box>
-//       <Box background="brand">Item 3</Box>
-//       <Box background="brand">Item 4</Box>
-//       <Box background="brand">Item 5</Box>
-//       <Box background="brand">Item 6</Box>
-//     </Grid>
-//   </Grommet>
-
-// );
-
-// storiesOf("Grid", module)
-//   .add("App", () => <App />)
-//   .add("Percentages", () => <Percentages />)
-//   .add("N-column layout", () => <NColumnGrid />);
-
 
 export default App;
