@@ -1,9 +1,32 @@
 import React, { Component } from 'react'
-import { RangeInput, Text,Grommet, Box } from 'grommet';
+import { RangeInput, Text,Grommet, Box, Button } from 'grommet';
 import { grommet } from "grommet/themes";
 import CanvasJSReact from './assets/canvasjs.react';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
+const nl2br = text =>
+  text.split(/(?:\r\n|\r|\n)/).reduce(
+      (res, frag, i, arr) => [
+        ...res,
+        frag,
+        ...(i < arr.length - 1 && [React.createElement("br")])
+      ],
+      []
+    );
+  
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  
+  element.click();
+  
+  document.body.removeChild(element);
+}
 
 class Opt1Result extends Component {
     constructor(props) {
@@ -11,6 +34,7 @@ class Opt1Result extends Component {
         // console.log("Result:", this.props.location.state.result)
         var coordinates = [];
         var textresult = ""
+
         if (this.props.location.state !== undefined && this.props.location.state.result !== undefined && this.props.location.state.result.length > 0) {
           coordinates = []
           
@@ -27,10 +51,14 @@ class Opt1Result extends Component {
           graphData: coordinates,
           maxTimestep: this.props.location.state.timestep,
           timestep : this.props.location.state.timestep,
+          textresult: textresult,
           loading: false
         };
     }
 
+    downloadResult =()=> {
+      download("resultOpt1.txt",this.state.textresult);
+    }
 
     componentDidMount() {
       this.renderMap()
@@ -227,9 +255,9 @@ class Opt1Result extends Component {
 
            
             <Grommet theme={grommet}>
-            <Box  pad="medium" background="light-4">
+            <Box  pad="small" background="light-4">
               <Box pad="small">
-                  <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
+                  <Text alignSelf="center" weight="bold" size="xlarge" >Optimization1 Result</Text>
               </Box>
 
               <Box direction="row" wrap="true" background="light-4">
@@ -243,8 +271,8 @@ class Opt1Result extends Component {
                   </Box>
               </Box>
 
-              <Box direction="row" wrap="true" pad="large" background="light-4">
-                    <Box basis="1/3" align="center">
+              <Box direction="row" wrap="true" pad="medium" background="light-4">
+                    <Box basis="1/3" align="center" pad="large">
 	                  <RangeInput
 	                  value={value}
 	                  min={0}
@@ -254,14 +282,18 @@ class Opt1Result extends Component {
 	                  onChange={event => this.setState({ timestep: event.target.value })}
 	                />
 	                  <Text>Time Step: {timestep}</Text>
+
                     </Box>
+
+                    <Box flex={true} basis="2/3" height="small" align='center' background='light-4'  >
+                        <Box flex={true} wrap="false" background='white' border='all' style={{ width: '888px' }}overflow='auto'>
+                            {nl2br(textresult.toString())}
+                        </Box>
+                        <Box pad="small"><Button label="Download Result" color="#0c96bc" onClick={this.downloadResult}/> </Box>
+                    </Box>
+
               </Box>  
-              
-              <Box flex={true} basis="2/3" height="small" align='center' background='light-4' overflow='auto'>
-                    <Box flex={false} wrap="false" background='white' border='all' style={{ width: '888px' }}>
-                    <Text>{textresult}</Text>
-                    </Box>
-              </Box>
+
               
             </Box>
               
