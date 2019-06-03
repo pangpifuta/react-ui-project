@@ -10,16 +10,19 @@ class Opt1Result extends Component {
         super(props)
         // console.log("Result:", this.props.location.state.result)
         var coordinates = [];
+        var textresult = ""
         if (this.props.location.state !== undefined && this.props.location.state.result !== undefined && this.props.location.state.result.length > 0) {
           coordinates = []
           
           var pointy = this.props.location.state.result[0];
           var carCoordinates = this.props.location.state.result[1];
+          textresult = this.props.location.state.result[2];
 
           for (var i = 0; i < pointy.length; i++) {
             coordinates.push({x: i+1,y: pointy[i]})
           }
         }
+
         this.state = {
           graphData: coordinates,
           maxTimestep: this.props.location.state.timestep,
@@ -188,6 +191,8 @@ class Opt1Result extends Component {
         const { timestep } = this.state;
         const { graphData} = this.state;
         const { maxTimestep} = this.state;
+        const {textresult} = this.state;
+
         // console.log(maxTimestep, timestep)
         const divStyle = {
           width: '95%',
@@ -223,7 +228,10 @@ class Opt1Result extends Component {
            
             <Grommet theme={grommet}>
             <Box  pad="medium" background="light-4">
-            <Text alignSelf="center" size="xlarge" >Optimization1 Result</Text>
+              <Box pad="small">
+                  <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
+              </Box>
+
               <Box direction="row" wrap="true" background="light-4">
                   <Box basis="1/2">
                   <div id="map" style={divStyle} ></div>
@@ -248,19 +256,13 @@ class Opt1Result extends Component {
 	                  <Text>Time Step: {timestep}</Text>
                     </Box>
               </Box>  
-
-              {/*<Box direction="row" pad="large"  background="light-4">
-               <Text>Time Step</Text> 
-                    <RangeInput
-                    value={value}
-                    min={0}
-                    max={10}
-                    step={1}
-                    value={timestep} 
-                    onChange={event => this.setState({ timestep: event.target.value })}
-                  />
-                    <Text>Time Step: {timestep}</Text> 
-              </Box> */}
+              
+              <Box flex={true} basis="2/3" height="small" align='center' background='light-4' overflow='auto'>
+                    <Box flex={false} wrap="false" background='white' border='all' style={{ width: '888px' }}>
+                    <Text>{textresult}</Text>
+                    </Box>
+              </Box>
+              
             </Box>
               
           </Grommet>

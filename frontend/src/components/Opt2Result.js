@@ -3,7 +3,19 @@ import { RangeInput, Text,Grommet, Box } from 'grommet';
 import { grommet } from "grommet/themes";
 import CanvasJSReact from './assets/canvasjs.react';
 
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
+
+const nl2br = text =>
+  text.split(/(?:\r\n|\r|\n)/).reduce(
+      (res, frag, i, arr) => [
+        ...res,
+        frag,
+        ...(i < arr.length - 1 && [React.createElement("br")])
+      ],
+      []
+    );
 
 class Opt2Result extends Component {
     constructor(props) {
@@ -11,12 +23,17 @@ class Opt2Result extends Component {
         // console.log("Result:", this.props.location.state.result)
         var coordinates = [];
         var textresult = ""
+
         if (this.props.location.state !== undefined && this.props.location.state.result !== undefined && this.props.location.state.result.length > 0) {
           coordinates = []
           
           var pointy = this.props.location.state.result[0];
           var carCoordinates = this.props.location.state.result[1];
           textresult = this.props.location.state.result[2];
+
+          
+
+          
           
           for (var i = 0; i < pointy.length; i++) {
             coordinates.push({x: i+1,y: pointy[i]})
@@ -193,8 +210,9 @@ class Opt2Result extends Component {
         const { timestep } = this.state;
         const { graphData} = this.state;
         const { maxTimestep} = this.state;
-        const {textresult} = this.state;
+        const {textresult} = this.state
         
+
         // console.log(maxTimestep, timestep)
         const divStyle = {
           width: '95%',
@@ -224,6 +242,9 @@ class Opt2Result extends Component {
             dataPoints: graphData
           }]
         } 
+
+        
+          
 
         return (
             <Grommet theme={grommet}>
@@ -259,7 +280,7 @@ class Opt2Result extends Component {
 
                     <Box flex={true} basis="2/3" height="small" align='center' background='light-4' overflow='auto'>
                         <Box flex={false} wrap="false" background='white' border='all' style={{ width: '888px' }}>
-                        <Text>{textresult}</Text>
+                            {nl2br(textresult.toString())}
                         </Box>
                     </Box>
                   </Box>  
