@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RangeInput, Text,Grommet, Box } from 'grommet';
+import { RangeInput, Text,Grommet, Box, Button } from 'grommet';
 import { grommet } from "grommet/themes";
 import CanvasJSReact from './assets/canvasjs.react';
 
@@ -16,6 +16,19 @@ const nl2br = text =>
       ],
       []
     );
+  
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  
+  element.click();
+  
+  document.body.removeChild(element);
+}
 
 class Opt2Result extends Component {
     constructor(props) {
@@ -30,10 +43,6 @@ class Opt2Result extends Component {
           var pointy = this.props.location.state.result[0];
           var carCoordinates = this.props.location.state.result[1];
           textresult = this.props.location.state.result[2];
-
-          
-
-          
           
           for (var i = 0; i < pointy.length; i++) {
             coordinates.push({x: i+1,y: pointy[i]})
@@ -48,8 +57,17 @@ class Opt2Result extends Component {
           carCoordinates: carCoordinates,
           loading: false
         };
+
+        
+
+
+
+        
     }
 
+    downloadResult =()=> {
+      download("resultOpt2.txt",this.state.textresult);
+    }
 
     componentDidMount() {
       this.renderMap()
@@ -248,10 +266,10 @@ class Opt2Result extends Component {
 
         return (
             <Grommet theme={grommet}>
-              <Box  pad="medium" background="light-4"> 
+              <Box  pad="small" background="light-4"> 
 
-                  <Box pad="small">
-                  <Text alignSelf="center" size="xlarge" >Optimization2 Result</Text>
+                  <Box pad="small" >
+                  <Text alignSelf="center" weight="bold" size="xlarge" >Optimization2 Result</Text>
                   </Box>
 
                   <Box direction="row" wrap="true" background="light-4">
@@ -278,11 +296,13 @@ class Opt2Result extends Component {
 	                    <Text>Time Step: {timestep}</Text>
                     </Box>
 
-                    <Box flex={true} basis="2/3" height="small" align='center' background='light-4' overflow='auto'>
-                        <Box flex={false} wrap="false" background='white' border='all' style={{ width: '888px' }}>
+                    <Box flex={true} basis="2/3" height="small" align='center' background='light-4'  >
+                        <Box flex={true} wrap="false" background='white' border='all' style={{ width: '888px' }}overflow='auto'>
                             {nl2br(textresult.toString())}
                         </Box>
+                        <Box pad="small"><Button label="Download Result" color="#0c96bc" onClick={this.downloadResult}/> </Box>
                     </Box>
+                    
                   </Box>  
 
             </Box>
