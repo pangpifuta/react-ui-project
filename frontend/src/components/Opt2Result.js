@@ -242,7 +242,7 @@ class Opt2Result extends Component {
           exportEnabled: true,
           theme: "light2", // "light1", "dark1", "dark2"
           title:{
-            text: "Traffic Improvement"
+            text: "Fitness Graph"
           },
           axisY: {
             title: "Fitness",
