@@ -87,6 +87,7 @@ class Controller:
 
 def optimization1(params):
     NUM_INDIVIDUALS = params["numIndividuals1"]
+
     preDefinedParams = {"crossover": {"operator": tools.cxTwoPoint},
                         "mutate": {"operator": tools.mutShuffleIndexes, "indpb": 0.1},
                         "select": {"operator": tools.selRoulette, "k": int(math.sqrt(NUM_INDIVIDUALS//2))},
@@ -99,19 +100,18 @@ def optimization1(params):
     controller = Controller({**params, **preDefinedParams})
     positions, fitnesses, results, individual = controller.run2()
 
-    temp = []
-    for i in individual:
-        temp.append(i)
-    with open('temp.pickle', 'wb') as f:
-        pickle.dump(temp, f)
+      temp = []
+       for i in individual:
+            temp.append(i)
+        with open('temp.pickle', 'wb') as f:
+            pickle.dump(temp, f)
     return fitnesses, results, positions
 
 
 # params = {"numGeneration1": 2,
-#           "timeSteps": 2,
-#           "intervalSize": 120,
-#           "numIndividuals1": 4,
-#           "saveLocation": "PopulationGA2.pickle",}
-
-# a, b, c = optimization1(params)
-# print(c)
+# "timeSteps": 2,
+# "intervalSize": 120,
+# "numIndividuals1": 4,
+# "saveLocation": "PopulationGA2.pickle",}
+##
+##a, b, c = optimization1(params)
